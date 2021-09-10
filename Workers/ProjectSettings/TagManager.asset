@@ -8,6 +8,10 @@ TagManager:
   - Mop
   - Money
   - Trap
+  - Boss
+  - Entry
+  - Exit
+  - BoxPile
   layers:
   - Default
   - TransparentFX

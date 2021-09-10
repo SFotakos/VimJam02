@@ -48,6 +48,24 @@ public class PlayerController : MonoBehaviour
             groundedCallback();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Entry"))
+        {
+            if (playerCombat.hasSnapped)
+            {
+                Debug.Log("EntryReached Snapped");
+            } else
+            {
+                Debug.Log("EntryReached Not Snapped");
+            }
+        } else if (collision.CompareTag("Exit"))
+        {
+            //TODO check for finishedTasks
+            Debug.Log("ExitReached");
+        }
+    }
+
     public void Move(float move, bool jump)
     {
         Vector3 targetVelocity = new Vector2(move, playerRigidbody2D.velocity.y);

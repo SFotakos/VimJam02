@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     private GameController gameController;
 
-    public int maxStress = 100;
+    public int maxStress = 20;
     int currentStress;
 
     float m_HurtDelay = .3f;
