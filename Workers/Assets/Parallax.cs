@@ -7,6 +7,7 @@ public class Parallax : MonoBehaviour
     private float length, startPos;
     [SerializeField] private GameObject cam;
     [SerializeField] private float parallaxAmount;
+    [SerializeField] [Range(1, 60)] private float movementMultiplier = 40f;
 
     void Start()
     {
@@ -14,12 +15,11 @@ public class Parallax : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         float movedFromCamera = cam.transform.position.x * (1 - parallaxAmount);
         float dist = cam.transform.position.x * parallaxAmount;
-        transform.position = new Vector3(startPos + dist * 40f * Time.fixedDeltaTime, transform.position.y, transform.position.z);
+        transform.position = new Vector3(startPos + dist * movementMultiplier * Time.fixedDeltaTime, transform.position.y, transform.position.z);
 
         if (movedFromCamera > startPos + length)
             startPos += length;
