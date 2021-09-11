@@ -227,7 +227,6 @@ GameObject:
   - component: {fileID: 6428008354333446313}
   - component: {fileID: 6428008354333446316}
   - component: {fileID: 6428008354333446319}
-  - component: {fileID: 6428008354333446312}
   - component: {fileID: 7533974098364525228}
   m_Layer: 0
   m_Name: Player
@@ -314,28 +313,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   groundCheck: {fileID: 6428008355064487015}
-  groundCheckDistance: 0.15
+  groundCheckRadius: 0.08
   whatIsLadder:
     serializedVersion: 2
     m_Bits: 4096
   ladderCheck: {fileID: 549100581270013718}
   ladderCheckDistance: 0.15
   facingRight: 1
---- !u!114 &6428008354333446312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428008354333446317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 870ba61656a5da84893dc420b83239d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 6428008354333446319}
-  playerCombat: {fileID: 7533974098364525228}
-  animator: {fileID: 56230989023841181}
 --- !u!114 &7533974098364525228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6428008355064487012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6428008354333446318}
