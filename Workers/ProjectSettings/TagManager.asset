@@ -4,14 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Box
-  - Mop
-  - Money
   - Trap
-  - Boss
   - Entry
   - Exit
-  - BoxPile
+  - LadderBottom
+  - LadderTop
   layers:
   - Default
   - TransparentFX
@@ -25,7 +22,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Ladder
   - 
   - 
   - 

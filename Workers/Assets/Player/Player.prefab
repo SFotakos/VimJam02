@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6428008354333446318}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -83,6 +83,36 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!1 &2531031891512801474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 549100581270013718}
+  m_Layer: 0
+  m_Name: LadderCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &549100581270013718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531031891512801474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6428008354333446318}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6428008354300741043
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +249,7 @@ Transform:
   m_Children:
   - {fileID: 6428008354300741042}
   - {fileID: 6428008355064487015}
+  - {fileID: 549100581270013718}
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -272,15 +303,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccd0fac68125ea4693938bc8b9c7931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCombat: {fileID: 7533974098364525228}
+  playerRigidbody: {fileID: 6428008354333446313}
   animator: {fileID: 56230989023841181}
-  jumpForce: 400
+  playerCombat: {fileID: 7533974098364525228}
+  movementSpeed: 250
+  climbingSpeed: 150
+  jumpForce: 450
   movementSmoothing: 0.05
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2048
   groundCheck: {fileID: 6428008355064487015}
-  playerRigidbody2D: {fileID: 6428008354333446313}
+  groundedRadius: 0.05
+  whatIsLadder:
+    serializedVersion: 2
+    m_Bits: 4096
+  ladderCheck: {fileID: 549100581270013718}
+  ladderCheckDistance: 0.15
   facingRight: 1
 --- !u!114 &6428008354333446312
 MonoBehaviour:
@@ -297,7 +336,6 @@ MonoBehaviour:
   controller: {fileID: 6428008354333446319}
   playerCombat: {fileID: 7533974098364525228}
   animator: {fileID: 56230989023841181}
-  playerSpeed: 350
 --- !u!114 &7533974098364525228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6428008355064487012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6428008354333446318}

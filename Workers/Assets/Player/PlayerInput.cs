@@ -6,9 +6,10 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
     public Animator animator;
 
-    [SerializeField] private float playerSpeed = 350f;
     float horizontalMovement = 0f;
     bool shouldJump = false;
+
+    float verticalMovement = 0f;
 
     private void Awake() => controller.groundedCallback = Landed;
 
@@ -17,7 +18,9 @@ public class PlayerInput : MonoBehaviour
         if (playerCombat.hasSnapped)
             return;
 
-        horizontalMovement = Input.GetAxisRaw("Horizontal") * playerSpeed;
+        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        
+        verticalMovement = Mathf.Max(0, Input.GetAxisRaw("Vertical"));
 
         if (Input.GetButtonDown("Jump") && !animator.GetBool("IsJumping"))
             shouldJump = true;
@@ -28,12 +31,7 @@ public class PlayerInput : MonoBehaviour
         if (playerCombat.hasSnapped)
             return;
 
-        controller.Move(horizontalMovement * Time.fixedDeltaTime, shouldJump);
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
-
-        if (shouldJump)
-            animator.SetBool("IsJumping", true);
-
+        controller.Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
         shouldJump = false;
     }
 
