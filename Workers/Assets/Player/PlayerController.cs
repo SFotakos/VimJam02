@@ -112,8 +112,8 @@ public class PlayerController : MonoBehaviour
         float _verticalMovement = climbing ? verticalMovement * climbingSpeed : playerRigidbody.velocity.y;
         float _horizontalMovement = horizontalMovement * movementSpeed;
 
-        Vector3 targetVelocity = new Vector2(_horizontalMovement, _verticalMovement);
-        playerRigidbody.velocity = Vector3.SmoothDamp(playerRigidbody.velocity, targetVelocity, ref playerVelocity, movementSmoothing);
+        playerRigidbody.velocity = new Vector2(_horizontalMovement, _verticalMovement);
+        //playerRigidbody.velocity = Vector3.SmoothDamp(playerRigidbody.velocity, targetVelocity, ref playerVelocity, movementSmoothing);
 
         if (isGrounded && jump)
         {

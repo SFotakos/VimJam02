@@ -229,12 +229,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &190996213 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6428008354333446318, guid: c3635c38430ec4948815e120f6962598,
-    type: 3}
-  m_PrefabInstance: {fileID: 434960452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &282994042
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +674,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6428008354333446313, guid: c3635c38430ec4948815e120f6962598,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6428008354333446317, guid: c3635c38430ec4948815e120f6962598,
         type: 3}
       propertyPath: m_Name
@@ -739,6 +738,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428008354333446319, guid: c3635c38430ec4948815e120f6962598,
+        type: 3}
+      propertyPath: movementSmoothing
+      value: 0.12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3635c38430ec4948815e120f6962598, type: 3}
@@ -6213,8 +6217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd965e1e4c6e8c34ea0e7917b2416203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 190996213}
-  smoothSpeed: 0.125
+  target: {fileID: 0}
 --- !u!1 &1762938886
 GameObject:
   m_ObjectHideFlags: 0
@@ -8713,6 +8716,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1433552058}
+    - target: {fileID: 2417914700777610982, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2417914701366189849, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
       propertyPath: m_RootOrder
@@ -8773,30 +8781,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 2417914701366189850, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2417914701508596800, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1433552058}
+    - target: {fileID: 2417914701508596800, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417914701731483708, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1433552058}
     - target: {fileID: 2417914701731483708, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417914701914911960, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1433552058}
     - target: {fileID: 2417914701914911960, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417914702040525892, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1433552058}
     - target: {fileID: 2417914702040525892, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1433552058}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2417914702274071860, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1433552058}
+    - target: {fileID: 2417914702274071860, guid: 3dfd08774bbe4cf43b80fe7143ea638f,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dfd08774bbe4cf43b80fe7143ea638f, type: 3}
