@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     [SerializeField] private LayerMask whatIsGround;                                // A mask determining what is ground to the character.
     [SerializeField] private Transform groundCheck;                                 // A position marking where to check if the player is grounded.
-    [Range(.03f, .1f)] [SerializeField] private float groundedRadius = .05f;        // Radius of the overlap circle to determine if grounded.
-    private bool isGrounded;                                                        // Whether or not the player is grounded.
+    [Range(.03f, .15f)] [SerializeField] private float groundCheckDistance = .035f; // Radius of the overlap circle to determine if grounded.
+    private bool isGrounded = true;                                                        // Whether or not the player is grounded.
     private Coroutine keepGroundedCoroutine = null;
     private float keepGroundedTime = .08f;                                          // So the play can jump a few milisseconds after he left the ground.
     public System.Action groundedCallback;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         originalGravityScale = playerRigidbody.gravityScale;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (playerCombat.hasSnapped)
             return;
@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour
         // Keep grounded for a few milisseconds
         if (playerRigidbody.velocity.y != 0 && keepGroundedCoroutine == null)
             keepGroundedCoroutine = StartCoroutine(KeepGrounded());
-        
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        Collider2D[] grounds = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, whatIsGround);
+
+        // The player is grounded if a raycast to the groundcheck position hits anything designated as ground
+        RaycastHit2D groundHitInfo = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         if (!isGrounded)
         {
             if (keepGroundedCoroutine != null)
@@ -60,19 +60,19 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(keepGroundedCoroutine);
                 keepGroundedCoroutine = null;
             }
-            if (grounds.Length != 0)
+            if (groundHitInfo.collider != null)
                 isGrounded = true;
         }
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
-        isNearLadder = hitInfo.collider != null;
+        RaycastHit2D ladderHitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
+        isNearLadder = ladderHitInfo.collider != null;
 
         if (isGrounded && playerRigidbody.velocity.y < 0f && animator.GetBool("IsJumping"))
             groundedCallback();
 
         if (Debug.isDebugBuild)
         {
-            Debug.DrawLine(groundCheck.position, (Vector2)groundCheck.position + Vector2.down * groundedRadius, Color.blue);
+            Debug.DrawLine(groundCheck.position, (Vector2)groundCheck.position + Vector2.down * groundCheckDistance, Color.blue);
             Debug.DrawLine(ladderCheck.position, (Vector2)ladderCheck.position + Vector2.up * ladderCheckDistance, Color.red);
         }
     }
@@ -84,11 +84,13 @@ public class PlayerController : MonoBehaviour
             if (playerCombat.hasSnapped)
             {
                 Debug.Log("EntryReached Snapped");
-            } else
+            }
+            else
             {
                 Debug.Log("EntryReached Not Snapped");
             }
-        } else if (collision.CompareTag("Exit"))
+        }
+        else if (collision.CompareTag("Exit"))
         {
             //TODO check for finishedTasks
             Debug.Log("ExitReached");
@@ -101,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         bool climbing = isNearLadder && verticalMovement > 0;
         playerRigidbody.gravityScale = climbing ? 0 : originalGravityScale;
-        float _verticalMovement = climbing ? verticalMovement * movementSpeed/2 : playerRigidbody.velocity.y;
+        float _verticalMovement = climbing ? verticalMovement * climbingSpeed : playerRigidbody.velocity.y;
         float _horizontalMovement = horizontalMovement * movementSpeed;
 
         Vector3 targetVelocity = new Vector2(_horizontalMovement, _verticalMovement);
@@ -116,7 +118,7 @@ public class PlayerController : MonoBehaviour
         HandleAnimations(_horizontalMovement, _verticalMovement, jump, climbing);
     }
 
-    private void HandleAnimations (float horizontalMovement, float verticalMovement, bool jumping, bool climbing)
+    private void HandleAnimations(float horizontalMovement, float verticalMovement, bool jumping, bool climbing)
     {
         animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
         if (jumping) animator.SetBool("IsJumping", true);
@@ -138,7 +140,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    public void InstantKill() => playerCombat.IncreaseStress(playerCombat.maxStress); 
+    public void InstantKill() => playerCombat.IncreaseStress(playerCombat.maxStress);
 
     public void Reset()
     {
