@@ -65,9 +65,9 @@ public class PlayerController : MonoBehaviour
 
         // The player is grounded if a raycast from the groundcheck position hits anything designated as ground.
         Collider2D groundHit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (groundHit != null && playerRigidbody.velocity.y <= 0f)
+        if (groundHit != null)
             isGrounded = true;
-        else if (playerRigidbody.velocity.y < 0 && keepGroundedCoroutine == null) 
+        else if (playerRigidbody.velocity.y < 0 && keepGroundedCoroutine == null)
             keepGroundedCoroutine = StartCoroutine(KeepGrounded()); // Keep grounded for a few milisseconds
 
         RaycastHit2D ladderHitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
