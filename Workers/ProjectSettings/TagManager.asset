@@ -7,8 +7,8 @@ TagManager:
   - Trap
   - Entry
   - Exit
-  - LadderBottom
-  - LadderTop
+  - Box
+  - BoxUnloadingArea
   layers:
   - Default
   - TransparentFX

@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
 
+    private GameObject box = null;
+
     private void Awake()
     {
         originalGravityScale = playerRigidbody.gravityScale;
@@ -98,6 +100,24 @@ public class PlayerController : MonoBehaviour
         {
             //TODO check for finishedTasks
             Debug.Log("ExitReached");
+        } else if (collision.CompareTag("Box"))
+        {
+            if (box == null) 
+            {
+                box = collision.gameObject;
+                box.GetComponent<Collider2D>().enabled = false;
+                box.SetActive(false);
+
+            }
+            
+        } else if (collision.CompareTag("BoxUnloadingArea"))
+        {
+            if (box != null)
+            {
+                BoxUnloadingArea boxUnloadingArea = collision.GetComponent<BoxUnloadingArea>();
+                boxUnloadingArea.AddBox(box);
+                box = null;
+            }
         }
     }
 
