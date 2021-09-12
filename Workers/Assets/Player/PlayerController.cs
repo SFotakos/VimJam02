@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
     [Range(150f, 400f)] [SerializeField] private float movementSpeed = 300f;        // Movement multiplier to the horizontal axis.
     [Range(100f, 200f)] [SerializeField] private float climbingSpeed = 200f;        // Climbing multiplier for the climbing movement.
     [Range(200f, 800f)] [SerializeField] private float jumpForce = 400f;            // Amount of force added when the player jumps.
-    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;        // How much to smooth out the movement.
-
+    
     private float horizontalMovement = 0f;
     private float verticalMovement = 0f;
     private bool shouldJump = false;
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
     private bool isNearLadder = false;
 
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
-    private Vector3 playerVelocity = Vector3.zero;                                  // Reference for SmoothDamp movement.
     private float originalGravityScale;
 
     private void Awake()
@@ -113,7 +111,6 @@ public class PlayerController : MonoBehaviour
         float _horizontalMovement = horizontalMovement * movementSpeed;
 
         playerRigidbody.velocity = new Vector2(_horizontalMovement, _verticalMovement);
-        //playerRigidbody.velocity = Vector3.SmoothDamp(playerRigidbody.velocity, targetVelocity, ref playerVelocity, movementSmoothing);
 
         if (isGrounded && jump)
         {
