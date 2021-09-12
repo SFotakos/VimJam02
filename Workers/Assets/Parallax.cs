@@ -21,8 +21,8 @@ public class Parallax : MonoBehaviour
     {
         float movedFromCamera = cam.transform.position.x * (1 - parallaxAmount);
         float dist = cam.transform.position.x * parallaxAmount;
-        Vector3 desiredPosition = new Vector3(startPos + dist * movementMultiplier * Time.fixedDeltaTime, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = new Vector3(startPos + dist * movementMultiplier, transform.position.y, transform.position.z);
+        //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
  
         if (movedFromCamera > startPos + length)
             startPos += length;
