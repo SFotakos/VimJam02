@@ -235,6 +235,7 @@ MonoBehaviour:
   ladderCheck: {fileID: 549100581270013718}
   ladderCheckDistance: 0.15
   facingRight: 1
+  carriedItemImage: {fileID: 0}
 --- !u!114 &7533974098364525228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,8 +249,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 56230989023841181}
-  maxStress: 20
+  maxStress: 100
+  currentStress: 0
+  stressPerSecond: 0.5
   hasSnapped: 0
+  stressMeter: {fileID: 0}
 --- !u!1 &6428008355064487012
 GameObject:
   m_ObjectHideFlags: 0

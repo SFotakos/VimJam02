@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] private Animator animator;
     private GameController gameController;
 
-    public int maxStress = 20;
-    int currentStress;
+    [Header("Stress Variables")]
+    [Space(5)]
+    [Range(20, 200)] public float maxStress = 100f;
+    [HideInInspector] public float currentStress;
+    [Range(.5f, 2.5f)] public float stressPerSecond = .5f;
 
-    float m_HurtDelay = .3f;
-    float m_HurtTimer = 0f;
-    bool m_CanBeHurt = true;
-    public bool hasSnapped = false;
+    private float hurtDelay = .3f;
+    private float hurtTimer = 0f;
+    private bool canBeHurt = true;
+    [HideInInspector] public bool hasSnapped = false;
+
+    [Header("UI")]
+    [Space(5)]
+    [SerializeField] private Image stressMeter;
+
+    Coroutine increaseStressCoroutine = null;
 
     private void Awake()
     {
@@ -25,45 +35,48 @@ public class PlayerCombat : MonoBehaviour
         if (hasSnapped)
             return;
 
-        if (!m_CanBeHurt)
-        {
-            if (Time.time >= m_HurtTimer)
-            {
-                m_CanBeHurt = true;
-            }
-        }
+        if (!canBeHurt && Time.time >= hurtTimer)
+            canBeHurt = true;
+
+        if (increaseStressCoroutine == null)
+            increaseStressCoroutine = StartCoroutine(IncreaseStressPerSecond(stressPerSecond));
     }
-
-    public void IncreaseStress(int damage = 1)
-    {
-        if (m_CanBeHurt)
-        {
-
-            m_CanBeHurt = false;
-            m_HurtTimer = Time.time + m_HurtDelay;
-            currentStress += damage;
-
-            animator.SetTrigger("Hurt");
-
-            if (currentStress >= maxStress)
-            {
-                animator.SetBool("Snapped", true);
-                hasSnapped = true;
-                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                animator.SetFloat("Speed", 0f);
-                animator.SetBool("IsJumping", false);
-            }
-        }
-    }
-
-    // Called by the end of the snap animation
-    public void Snapped() => StartCoroutine(RestartGame());
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Trap"))
             IncreaseStress();
     }
+
+    public void IncreaseStress(float damage = 5, bool respectInvincibility = true, bool visualFeedback = true)
+    {
+        if (respectInvincibility && !canBeHurt)
+            return;
+
+        if (respectInvincibility)
+        {
+            canBeHurt = false;
+            hurtTimer = Time.time + hurtDelay;
+        }
+        currentStress += damage;
+
+        if (visualFeedback)
+            animator.SetTrigger("Hurt");
+
+        if (currentStress >= maxStress)
+        {
+            animator.SetBool("Snapped", true);
+            hasSnapped = true;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            animator.SetFloat("Speed", 0f);
+            animator.SetBool("IsJumping", false);
+        }
+
+        stressMeter.fillAmount = currentStress / maxStress;
+    }
+
+    // Called by the end of the snap animation
+    public void Snapped() => StartCoroutine(RestartGame());
 
     IEnumerator RestartGame()
     {
@@ -72,12 +85,19 @@ public class PlayerCombat : MonoBehaviour
         Reset();
     }
 
+    IEnumerator IncreaseStressPerSecond(float stressPerSecond)
+    {
+        yield return new WaitForSeconds(.1f);
+        IncreaseStress(stressPerSecond / 10f, respectInvincibility: false, visualFeedback: false);
+        increaseStressCoroutine = null;
+    }
+
     public void Reset()
     {
         currentStress = maxStress;
-        m_HurtDelay = .7f;
-        m_HurtTimer = 0f;
-        m_CanBeHurt = true;
+        hurtDelay = .7f;
+        hurtTimer = 0f;
+        canBeHurt = true;
         hasSnapped = false;
     }
 }

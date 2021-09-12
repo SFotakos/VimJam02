@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerCombat playerCombat;
 
-    [Header("Movement Parameters")]
+    [Header("Movement Variables")]
     [Space(5)]
     [Range(150f, 400f)] [SerializeField] private float movementSpeed = 300f;        // Movement multiplier to the horizontal axis.
     [Range(100f, 200f)] [SerializeField] private float climbingSpeed = 200f;        // Climbing multiplier for the climbing movement.
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private float verticalMovement = 0f;
     private bool shouldJump = false;
 
-    [Header("Jump Handling Parameters")]
+    [Header("Jump Handling Variables")]
     [Space(5)]
     [SerializeField] private LayerMask whatIsGround;                                // A mask determining what is ground to the character.
     [SerializeField] private Transform groundCheck;                                 // A position marking where to check if the player is grounded.
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private Coroutine keepGroundedCoroutine = null;
     private float keepGroundedTime = .08f;                                          // So the play can jump a few milisseconds after he left the ground.
 
-    [Header("Ladder Handling Parameters")]
+    [Header("Ladder Handling Variables")]
     [Space(5)]
     [SerializeField] private LayerMask whatIsLadder;                                // A mask determining what is a ladder to the character.
     [SerializeField] private Transform ladderCheck;                                 // A position marking where to check for a ladder.
@@ -38,6 +39,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
 
+    [Header("UI")]
+    [Space(5)]
+    [SerializeField] private Image carriedItemImage;
+
+    // Inventory
     private GameObject box = null;
 
     private void Awake()
@@ -106,14 +112,17 @@ public class PlayerController : MonoBehaviour
             {
                 box = collision.gameObject;
                 box.GetComponent<Collider2D>().enabled = false;
+                carriedItemImage.sprite = box.GetComponentInChildren<SpriteRenderer>().sprite;
+                carriedItemImage.enabled = true;
                 box.SetActive(false);
-
             }
             
         } else if (collision.CompareTag("BoxUnloadingArea"))
         {
             if (box != null)
             {
+                carriedItemImage.enabled = false;
+
                 BoxUnloadingArea boxUnloadingArea = collision.GetComponent<BoxUnloadingArea>();
                 boxUnloadingArea.AddBox(box);
                 box = null;
