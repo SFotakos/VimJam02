@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: FactoryLadderRuleTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300000, guid: 9f8f4aba083f2b644a989e4dc087c60d, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
@@ -34,7 +34,7 @@ MonoBehaviour:
   - m_Id: 1
     m_Sprites:
     - {fileID: 0}
-    - {fileID: 21300000, guid: 53eb18a93e75cb640a2796feeff1a2aa, type: 3}
+    - {fileID: 0}
     m_GameObject: {fileID: 3984576951612569437, guid: 86ba4bc992f59014da5ece0f0e7775fc,
       type: 3}
     m_AnimationSpeed: 1
