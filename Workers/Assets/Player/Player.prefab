@@ -4898,9 +4898,9 @@ GameObject:
   - component: {fileID: 6428008354333446316}
   - component: {fileID: 6428008354333446319}
   - component: {fileID: 7533974098364525228}
+  - component: {fileID: 3174081677233490329}
   - component: {fileID: 1954241428}
   - component: {fileID: 4823690198781605239}
-  - component: {fileID: 3174081677233490329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5013,6 +5013,21 @@ MonoBehaviour:
   stressPerSecond: 0.5
   stressMeter: {fileID: 0}
   snapped: {fileID: 0}
+--- !u!114 &3174081677233490329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428008354333446317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3036a421db2cd7045b3b7c607aee3f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tasksUI: {fileID: 0}
+  taskEntry: {fileID: 3559002982460550421, guid: 996980200e5a2994ba55621016f6fcf1,
+    type: 3}
 --- !u!195 &1954241428
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5081,25 +5096,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3174081677233490329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428008354333446317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3036a421db2cd7045b3b7c607aee3f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tasksUI: {fileID: 0}
-  taskEntry: {fileID: 3559002982460550421, guid: 996980200e5a2994ba55621016f6fcf1,
-    type: 3}
-  boxSprite: {fileID: 21300000, guid: bc9236eebafa17445b10c8bb81ef6da3, type: 3}
-  mopSprite: {fileID: 21300000, guid: 8b03b05b6c3fe0643a32c41b5d84bee4, type: 3}
-  moneySprite: {fileID: 5670732621190257608, guid: c0550c8804427994fa2b3bb2bd42b253,
-    type: 3}
 --- !u!1 &6428008355064487012
 GameObject:
   m_ObjectHideFlags: 0
