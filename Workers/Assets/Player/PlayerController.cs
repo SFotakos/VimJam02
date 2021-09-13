@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsLadder;                                // A mask determining what is a ladder to the character.
     [SerializeField] private Transform ladderCheck;                                 // A position marking where to check for a ladder.
     [Range(.1f, .3f)] [SerializeField] private float ladderCheckDistance = .3f;     // A position marking where to check if the player is inside a ladder.
-    private bool isNearLadder = false;
+    private RaycastHit2D ladderHitInfo;
 
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
@@ -108,8 +108,7 @@ public class PlayerController : MonoBehaviour
         else if (playerRigidbody.velocity.y < 0 && keepGroundedCoroutine == null)
             keepGroundedCoroutine = StartCoroutine(KeepGrounded()); // Keep grounded for a few milisseconds
 
-        RaycastHit2D ladderHitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
-        isNearLadder = ladderHitInfo.collider != null;
+        ladderHitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
 
         if (Debug.isDebugBuild)
         {
@@ -169,10 +168,13 @@ public class PlayerController : MonoBehaviour
     // Horizontal and vertical movements are multiplied by Time.fixedDeltaTime
     private void Move(float horizontalMovement, float verticalMovement, bool jump)
     {
-        bool climbing = isNearLadder && verticalMovement > 0;
+        bool climbing = ladderHitInfo.collider != null && verticalMovement > 0;
         playerRigidbody.gravityScale = climbing ? 0 : originalGravityScale;
         float _verticalMovement = climbing ? verticalMovement * climbingSpeed : playerRigidbody.velocity.y;
-        float _horizontalMovement = horizontalMovement * movementSpeed;
+        float _horizontalMovement = horizontalMovement * movementSpeed * (climbing ? 0f : 1f);
+        // Align the character with the center of the ladder.
+        if (ladderHitInfo.collider != null && climbing)
+            transform.position = new Vector3(ladderHitInfo.collider.bounds.center.x, transform.position.y, transform.position.z);
 
         playerRigidbody.velocity = new Vector2(_horizontalMovement, _verticalMovement);
 
@@ -189,7 +191,7 @@ public class PlayerController : MonoBehaviour
     {
         bool jump = agent.isOnOffMeshLink && isGrounded;
 
-        bool climbing = isNearLadder && agent.velocity.y > 0.15f;
+        bool climbing = ladderHitInfo.collider != null && agent.velocity.y > 0.15f;
         HandleAnimations(agent.velocity.x, jump, climbing);
     }
 
