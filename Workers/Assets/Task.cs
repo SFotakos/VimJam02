@@ -15,8 +15,15 @@ public class Task : MonoBehaviour
     [HideInInspector] public int completedTaskAmount;
     [HideInInspector] public TaskType taskType;
 
+    [Header("UI")]
     public Image taskImage;
     public TextMeshProUGUI taskText;
+    [SerializeField]
+    private Sprite boxSprite;
+    [SerializeField]
+    private Sprite mopSprite;
+    [SerializeField]
+    private Sprite moneySprite;
 
     public Task(TaskType taskType, int taskAmount, Sprite taskIcon)
     {
@@ -24,6 +31,24 @@ public class Task : MonoBehaviour
         this.requiredTaskAmount = taskAmount;
         this.taskImage.sprite = taskIcon;
         this.taskText.text = completedTaskAmount + "/" + requiredTaskAmount;
+    }
+
+    public void InitializeTask(Task.TaskType taskType, int requiredTaskAmount)
+    {
+        this.taskType = taskType;
+        this.requiredTaskAmount = requiredTaskAmount;
+        switch (taskType)
+        {
+            case TaskType.BOX_COLLECTION:
+                taskImage.sprite = boxSprite;
+                break;
+            case TaskType.MOPPING:
+                taskImage.sprite = mopSprite;
+                break;
+            case TaskType.MONEY_DELIVERY:
+                taskImage.sprite = moneySprite;
+                break;
+        }
     }
 
     public void TaskProgress()

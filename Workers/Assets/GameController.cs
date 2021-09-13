@@ -15,8 +15,7 @@ public class GameController : MonoBehaviour
         {
             if (_instance == null)
             {
-                GameObject go = new GameObject();
-                _instance = go.AddComponent<GameController>();
+                _instance = FindObjectOfType<GameController>();
             }
             return _instance;
         }

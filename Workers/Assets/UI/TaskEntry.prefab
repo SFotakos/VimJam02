@@ -76,6 +76,10 @@ MonoBehaviour:
   taskType: 0
   taskImage: {fileID: 3559002983129756958}
   taskText: {fileID: 3559002983808073436}
+  boxSprite: {fileID: 21300000, guid: bc9236eebafa17445b10c8bb81ef6da3, type: 3}
+  mopSprite: {fileID: 21300000, guid: 8b03b05b6c3fe0643a32c41b5d84bee4, type: 3}
+  moneySprite: {fileID: -1282214387447324998, guid: c0550c8804427994fa2b3bb2bd42b253,
+    type: 3}
 --- !u!1 &3559002982898648138
 GameObject:
   m_ObjectHideFlags: 0

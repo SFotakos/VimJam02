@@ -4,7 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
-{
+{ 
+    private static TaskManager _instance;
+    public static TaskManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<TaskManager>();
+            }
+            return _instance;
+        }
+    }
+
     private GameController gameController;
 
     [Header("UI")]
@@ -12,12 +25,6 @@ public class TaskManager : MonoBehaviour
     private RectTransform tasksUI;
     [SerializeField]
     private GameObject taskEntry;
-    [SerializeField]
-    private Sprite boxSprite;
-    [SerializeField]
-    private Sprite mopSprite;
-    [SerializeField]
-    private Sprite moneySprite;
 
     private List<Task> tasks = new List<Task>();
     private bool finishedAllTasks = false;
@@ -31,16 +38,6 @@ public class TaskManager : MonoBehaviour
     private void Start()
     {
         gameController = GameController.instance;
-    }
-
-    private void CreateTaskEntry(Task.TaskType taskType, int requiredAmount, Sprite taskIcon)
-    {
-        GameObject _taskEntry = Instantiate(taskEntry, tasksUI);
-        Task task = _taskEntry.GetComponent<Task>();
-        task.taskType = taskType;
-        task.requiredTaskAmount = requiredAmount;
-        task.taskImage.sprite = taskIcon;
-        tasks.Add(task);
     }
 
     public void DeliveredBox()
@@ -65,11 +62,31 @@ public class TaskManager : MonoBehaviour
         UpdateTaskCompletion();
     }
 
+    public bool hasTaskOfType(Task.TaskType taskType)
+    {
+        foreach (Task task in tasks)
+        {
+            if (task.taskType == taskType)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void GenerateTasks()
     {
-        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3, boxSprite);
-        //CreateTaskEntry(Task.TaskType.MOPPING, 2, mopSprite);
-        //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 5, moneySprite);
+        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
+        CreateTaskEntry(Task.TaskType.MOPPING, 2);
+        CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 5);
+    }
+
+    private void CreateTaskEntry(Task.TaskType taskType, int requiredAmount)
+    {
+        GameObject _taskEntry = Instantiate(taskEntry, tasksUI);
+        Task task = _taskEntry.GetComponent<Task>();
+        task.InitializeTask(taskType, requiredAmount);
+        tasks.Add(task);
     }
 
     private void UpdateTaskCompletion()
