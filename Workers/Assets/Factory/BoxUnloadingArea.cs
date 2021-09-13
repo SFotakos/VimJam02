@@ -12,9 +12,6 @@ public class BoxUnloadingArea : MonoBehaviour
         BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
         unloadAreaCenter = boxCollider2D.bounds.center;
         unloadAreaSize = boxCollider2D.bounds.size;
-
-        Debug.Log("areaCenter: " + unloadAreaCenter);
-        Debug.Log("areaSize: " + unloadAreaSize);
         
         int rowsAmount = Mathf.FloorToInt(unloadAreaSize.y / pointSpacing.y);
         int columnsAmount = Mathf.FloorToInt(unloadAreaSize.x / pointSpacing.x);
@@ -37,13 +34,8 @@ public class BoxUnloadingArea : MonoBehaviour
             if (!position.hasBox)
             {
                 placedBox = true;
-                Debug.Log("boxTransformPosition: " + box.transform.position);
                 box.transform.position = position.boxPosition;
                 box.transform.parent = gameObject.transform;
-                //box.transform.localPosition = position.boxPosition;
-                Debug.Log("BoxPosition: " + position.boxPosition);
-                Debug.Log("boxTransformPosition2: " + box.transform.position);
-                Debug.Log("boxLocalTransformPosition: " + box.transform.localPosition);
                 position.hasBox = true;
                 break;
             }

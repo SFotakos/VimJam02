@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;                                                 // Whether or not the player is grounded.
     private Coroutine keepGroundedCoroutine = null;
     private float keepGroundedTime = .08f;                                          // So the play can jump a few milisseconds after he left the ground.
+    Collider2D groundHit;
 
     [Header("Ladder Handling Variables")]
     [Space(5)]
@@ -69,11 +70,11 @@ public class PlayerController : MonoBehaviour
                 agent.enabled = true;
                 agent.SetDestination(snappedDestination.position);
             }
+            HandleNavMeshMovement();
             return;
         }
 
         horizontalMovement = Input.GetAxisRaw("Horizontal");
-
         verticalMovement = Mathf.Max(0, Input.GetAxisRaw("Vertical"));
 
         if (Input.GetButtonDown("Jump") && !animator.GetBool("IsJumping"))
@@ -82,11 +83,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerCombat.hasSnapped && isGrounded)
-            return;
-
         // The player is grounded if a raycast from the groundcheck position hits anything designated as ground.
-        Collider2D groundHit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        groundHit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         if (groundHit != null)
             isGrounded = true;
         else if (playerRigidbody.velocity.y < 0 && keepGroundedCoroutine == null)
@@ -95,14 +93,17 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D ladderHitInfo = Physics2D.Raycast(ladderCheck.position, Vector2.up, ladderCheckDistance, whatIsLadder);
         isNearLadder = ladderHitInfo.collider != null;
 
-        Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
-        shouldJump = false;
-
         if (Debug.isDebugBuild)
         {
             Debug.DrawLine(groundCheck.position, (Vector2)groundCheck.position + Vector2.down * groundCheckRadius, Color.blue);
             Debug.DrawLine(ladderCheck.position, (Vector2)ladderCheck.position + Vector2.up * ladderCheckDistance, Color.red);
         }
+
+        if (playerCombat.hasSnapped)
+            return;
+
+        Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
+        shouldJump = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -163,12 +164,21 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(new Vector2(0f, jumpForce));
         }
 
-        HandleAnimations(_horizontalMovement, _verticalMovement, jump, climbing);
+        HandleAnimations(_horizontalMovement, jump, climbing);
     }
 
-    private void HandleAnimations(float horizontalMovement, float verticalMovement, bool jumping, bool climbing)
+    private void HandleNavMeshMovement()
     {
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+        //float positionY = groundHit != null ? groundHit.ClosestPoint(transform.position).y : transform.position.y;
+        //transform.position = new Vector3(transform.position.x, positionY, transform.position.z);
+        
+        bool climbing = isNearLadder && agent.velocity.y > 0.15f;
+        HandleAnimations(agent.velocity.x, false, climbing);
+    }
+
+    private void HandleAnimations(float horizontalMovement, bool jumping, bool climbing)
+    {
+        if (!climbing) animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
         if (jumping) animator.SetBool("IsJumping", true);
         animator.SetBool("IsClimbing", climbing);
         if (isGrounded) animator.SetBool("IsJumping", false);
