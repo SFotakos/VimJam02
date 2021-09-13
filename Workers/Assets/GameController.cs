@@ -6,8 +6,23 @@ public class GameController : MonoBehaviour
     private bool isPaused = false;
     private bool canPause = true;
 
+    private static GameController _instance;
+    public static GameController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = new GameObject();
+                _instance = go.AddComponent<GameController>();
+            }
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
+        _instance = FindObjectOfType<GameController>();
         LockCursor();
     }
 

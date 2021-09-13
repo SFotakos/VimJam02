@@ -27,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         currentStress = 0;
-        gameController = FindObjectOfType<GameController>();
+        gameController = GameController.instance;
     }
 
     void Update()

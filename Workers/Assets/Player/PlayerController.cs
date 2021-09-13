@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerCombat playerCombat;
+    private GameController gameController;
 
     [Header("Movement Variables")]
     [Space(5)]
@@ -42,13 +43,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
 
-    // Snapped Handling
+    [Header("Snapped AI Variables")]
+    [Space(5)]
     private NavMeshAgent agent;
     private AgentLinkMover agentLinkMover;
     [SerializeField] private Transform snappedDestination;
     private Coroutine offMeshLinkMoveCoroutine = null;
 
-    [Header("UI")]
+    [Header("UI Variables")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
 
@@ -65,8 +67,16 @@ public class PlayerController : MonoBehaviour
         agentLinkMover = GetComponent<AgentLinkMover>();
     }
 
+    private void Start()
+    {
+        gameController = GameController.instance;
+    }
+
     void Update()
     {
+        if (Input.GetButtonDown("Cancel"))
+            gameController.Restart();
+
         if (playerCombat.hasSnapped && isGrounded)
         {
             if (!agent.enabled)
