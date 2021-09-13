@@ -5,6 +5,8 @@ public class GameController : MonoBehaviour
 {
     private bool isPaused = false;
     private bool canPause = true;
+    public bool snapped = false;
+    public bool finishedAllTasks = false;
 
     private static GameController _instance;
     public static GameController instance

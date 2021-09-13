@@ -18,7 +18,6 @@ public class PlayerCombat : MonoBehaviour
     private float hurtDelay = .3f;
     private float hurtTimer = 0f;
     private bool canBeHurt = true;
-    [HideInInspector] public bool hasSnapped = false;
 
     [Header("UI")]
     [Space(5)]
@@ -27,15 +26,22 @@ public class PlayerCombat : MonoBehaviour
 
     Coroutine increaseStressCoroutine = null;
 
+    private GameController gameController;
+
     private void Awake()
     {
         snappedParticlesSystemRenderer = snappedParticles.GetComponent<ParticleSystemRenderer>();
         currentStress = 0;
     }
 
+    private void Start()
+    {
+        gameController = GameController.instance;
+    }
+
     void Update()
     {
-        if (hasSnapped)
+        if (gameController.snapped)
             return;
 
         if (!canBeHurt && Time.time >= hurtTimer)
@@ -47,7 +53,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Trap") && !hasSnapped)
+        if (collision.CompareTag("Trap") && !gameController.snapped)
             IncreaseStress();
     }
 
@@ -71,7 +77,7 @@ public class PlayerCombat : MonoBehaviour
             snapped.gameObject.SetActive(true);
             
             snappedParticles.Play();
-            hasSnapped = true;
+            gameController.snapped = true;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             animator.SetFloat("Speed", 0f);
             animator.SetBool("IsJumping", false);

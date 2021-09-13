@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     // Inventory
     private GameObject box = null;
+    private TaskManager taskManager;
 
     private void Awake()
     {
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
         agent.updateUpAxis = false;
         agent.autoTraverseOffMeshLink = false;
         agentLinkMover = GetComponent<AgentLinkMover>();
+        taskManager = GetComponent<TaskManager>();
     }
 
     private void Start()
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
             gameController.Restart();
 
-        if (playerCombat.hasSnapped && isGrounded)
+        if (gameController.snapped && isGrounded)
         {
             if (!agent.enabled)
             {
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(ladderCheck.position, (Vector2)ladderCheck.position + Vector2.up * ladderCheckDistance, Color.red);
         }
 
-        if (playerCombat.hasSnapped)
+        if (gameController.snapped)
             return;
 
         Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
@@ -126,19 +128,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Entry"))
         {
-            if (playerCombat.hasSnapped)
+            Debug.Log("EntryReached");
+            if (gameController.snapped)
             {
-                Debug.Log("EntryReached Snapped");
-            }
-            else
-            {
-                Debug.Log("EntryReached Not Snapped");
+                Debug.Log("Snapped");
             }
         }
         else if (collision.CompareTag("Exit"))
         {
-            //TODO check for finishedTasks
             Debug.Log("ExitReached");
+            if (gameController.finishedAllTasks)
+            {
+                Debug.Log("CanLeave");
+            }
         } else if (collision.CompareTag("Box"))
         {
             if (box == null) 
@@ -157,6 +159,7 @@ public class PlayerController : MonoBehaviour
                 carriedItemImage.enabled = false;
                 BoxUnloadingArea boxUnloadingArea = collision.GetComponent<BoxUnloadingArea>();
                 boxUnloadingArea.AddBox(box);
+                taskManager.DeliveredBox();
                 box = null;
             }
         }
