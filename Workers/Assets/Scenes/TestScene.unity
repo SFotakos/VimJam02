@@ -237,10 +237,10 @@ MonoBehaviour:
   m_StartPoint: {x: 2.5010214, y: 0, z: -0.64073163}
   m_EndPoint: {x: 0.43607825, y: 0, z: -0.6328233}
   m_Width: 0.2
-  m_CostModifier: -1
+  m_CostModifier: 1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 0
-  m_Area: 0
+  m_Area: 2
 --- !u!1 &173499502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,6 +2760,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &358206450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 358206451}
+  - component: {fileID: 358206452}
+  m_Layer: 0
+  m_Name: NavMeshLink (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &358206451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358206450}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -5.35, y: 3.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1020778666}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &358206452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358206450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 2.6331348, y: 0, z: -0.57465726}
+  m_EndPoint: {x: 2.252638, y: 0, z: -3.8622165}
+  m_Width: 0.2
+  m_CostModifier: 1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 2
 --- !u!1 &377478941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,12 +2939,12 @@ PrefabInstance:
     - target: {fileID: 6428008354333446318, guid: c3635c38430ec4948815e120f6962598,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.52
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 6428008354333446318, guid: c3635c38430ec4948815e120f6962598,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.64
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: 6428008354333446318, guid: c3635c38430ec4948815e120f6962598,
         type: 3}
@@ -3167,10 +3218,10 @@ MonoBehaviour:
   m_StartPoint: {x: 2.1710644, y: 0, z: -0.629685}
   m_EndPoint: {x: 0.9288912, y: 0, z: -0.6380072}
   m_Width: 0.2
-  m_CostModifier: -1
+  m_CostModifier: 1
   m_Bidirectional: 0
   m_AutoUpdatePosition: 0
-  m_Area: 0
+  m_Area: 2
 --- !u!1001 &590783738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13067,6 +13118,7 @@ Transform:
   - {fileID: 123707034}
   - {fileID: 1879786593}
   - {fileID: 534172104}
+  - {fileID: 358206451}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14053,10 +14105,10 @@ MonoBehaviour:
   m_StartPoint: {x: -0.00000013038516, y: 0, z: -0.90201455}
   m_EndPoint: {x: -0.02682457, y: 0, z: 1.1660123}
   m_Width: 0.2
-  m_CostModifier: -1
+  m_CostModifier: 1
   m_Bidirectional: 0
   m_AutoUpdatePosition: 0
-  m_Area: 0
+  m_Area: 2
 --- !u!1 &1707845913
 GameObject:
   m_ObjectHideFlags: 0
@@ -14378,10 +14430,10 @@ MonoBehaviour:
   m_StartPoint: {x: 2.2139645, y: 0, z: -2.67582}
   m_EndPoint: {x: 0.1939373, y: 0, z: -0.60181916}
   m_Width: 0.2
-  m_CostModifier: -1
+  m_CostModifier: 1
   m_Bidirectional: 1
   m_AutoUpdatePosition: 0
-  m_Area: 0
+  m_Area: 2
 --- !u!1 &1891522692
 GameObject:
   m_ObjectHideFlags: 0
@@ -14537,10 +14589,10 @@ MonoBehaviour:
   m_StartPoint: {x: 2.9096332, y: 0, z: -0.64431626}
   m_EndPoint: {x: 0.11826849, y: 0, z: -0.6354943}
   m_Width: 0.2
-  m_CostModifier: -1
+  m_CostModifier: 1
   m_Bidirectional: 0
   m_AutoUpdatePosition: 0
-  m_Area: 0
+  m_Area: 2
 --- !u!1 &1975571784
 GameObject:
   m_ObjectHideFlags: 0

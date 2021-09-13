@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;                                 // A position marking where to check if the player is grounded.
     [Range(.03f, .15f)] [SerializeField] private float groundCheckRadius = .035f;   // Radius of the overlap circle to determine if grounded.
     private bool isGrounded = true;                                                 // Whether or not the player is grounded.
+    private bool disableGroundCheck = false;
     private Coroutine keepGroundedCoroutine = null;
     private float keepGroundedTime = .08f;                                          // So the play can jump a few milisseconds after he left the ground.
     Collider2D groundHit;
@@ -43,7 +44,9 @@ public class PlayerController : MonoBehaviour
 
     // Snapped Handling
     private NavMeshAgent agent;
+    private AgentLinkMover agentLinkMover;
     [SerializeField] private Transform snappedDestination;
+    private Coroutine offMeshLinkMoveCoroutine = null;
 
     [Header("UI")]
     [Space(5)]
@@ -58,6 +61,8 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        agent.autoTraverseOffMeshLink = false;
+        agentLinkMover = GetComponent<AgentLinkMover>();
     }
 
     void Update()
@@ -85,8 +90,9 @@ public class PlayerController : MonoBehaviour
     {
         // The player is grounded if a raycast from the groundcheck position hits anything designated as ground.
         groundHit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (groundHit != null)
+        if (groundHit != null && !disableGroundCheck)
             isGrounded = true;
+
         else if (playerRigidbody.velocity.y < 0 && keepGroundedCoroutine == null)
             keepGroundedCoroutine = StartCoroutine(KeepGrounded()); // Keep grounded for a few milisseconds
 
@@ -139,7 +145,6 @@ public class PlayerController : MonoBehaviour
             if (box != null)
             {
                 carriedItemImage.enabled = false;
-
                 BoxUnloadingArea boxUnloadingArea = collision.GetComponent<BoxUnloadingArea>();
                 boxUnloadingArea.AddBox(box);
                 box = null;
@@ -149,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
     // Called each FixedUpdate by the PlayerInput class
     // Horizontal and vertical movements are multiplied by Time.fixedDeltaTime
-    public void Move(float horizontalMovement, float verticalMovement, bool jump)
+    private void Move(float horizontalMovement, float verticalMovement, bool jump)
     {
         bool climbing = isNearLadder && verticalMovement > 0;
         playerRigidbody.gravityScale = climbing ? 0 : originalGravityScale;
@@ -169,19 +174,29 @@ public class PlayerController : MonoBehaviour
 
     private void HandleNavMeshMovement()
     {
-        //float positionY = groundHit != null ? groundHit.ClosestPoint(transform.position).y : transform.position.y;
-        //transform.position = new Vector3(transform.position.x, positionY, transform.position.z);
-        
+        bool jump = agent.isOnOffMeshLink && isGrounded;
+
         bool climbing = isNearLadder && agent.velocity.y > 0.15f;
-        HandleAnimations(agent.velocity.x, false, climbing);
+        HandleAnimations(agent.velocity.x, jump, climbing);
     }
 
     private void HandleAnimations(float horizontalMovement, bool jumping, bool climbing)
     {
-        if (!climbing) animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
-        if (jumping) animator.SetBool("IsJumping", true);
+        if (jumping)
+        {
+            animator.SetBool("IsJumping", true);
+            if (agent.enabled && offMeshLinkMoveCoroutine == null)
+            {
+                offMeshLinkMoveCoroutine = StartCoroutine(StartOffMeshLinkMove());
+            }
+        }
         animator.SetBool("IsClimbing", climbing);
-        if (isGrounded) animator.SetBool("IsJumping", false);
+
+        if (!climbing) 
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+
+        if (isGrounded) 
+            animator.SetBool("IsJumping", false);
 
         //Flip player
         if (horizontalMovement > 0 && !facingRight) Flip();
@@ -201,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
     public void InstantKill() => playerCombat.IncreaseStress(playerCombat.maxStress);
 
-    public void Reset()
+    private void Reset()
     {
         // Reset game
         transform.position = Vector2.zero;
@@ -213,5 +228,22 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(keepGroundedTime);
         isGrounded = false;
         keepGroundedCoroutine = null;
+    }
+
+    IEnumerator StartOffMeshLinkMove()
+    {
+        disableGroundCheck = true;
+        isGrounded = false;
+        if (agentLinkMover.navigationMethod == OffMeshLinkMoveMethod.NormalSpeed)
+            yield return StartCoroutine(agentLinkMover.NormalSpeed(agent));
+        else if (agentLinkMover.navigationMethod == OffMeshLinkMoveMethod.Parabola)
+            yield return StartCoroutine(agentLinkMover.Parabola(agent, 2.0f, 0.5f));
+        else if (agentLinkMover.navigationMethod == OffMeshLinkMoveMethod.Curve)
+            yield return StartCoroutine(agentLinkMover.Curve(agent, 0.5f));
+
+        agent.CompleteOffMeshLink();
+        offMeshLinkMoveCoroutine = null;
+        disableGroundCheck = false;
+        yield return null;
     }
 }
