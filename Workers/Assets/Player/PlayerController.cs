@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
 
-    [Header("Snapped AI Variables")]
+    [Header("Snapped Variables")]
     [Space(5)]
     private NavMeshAgent agent;
     private AgentLinkMover agentLinkMover;
@@ -222,6 +222,8 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+        playerCombat.FlipParticles();
     }
 
     public void InstantKill() => playerCombat.IncreaseStress(playerCombat.maxStress);

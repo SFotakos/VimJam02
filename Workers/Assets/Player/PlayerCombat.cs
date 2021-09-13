@@ -5,13 +5,15 @@ using UnityEngine.UI;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    private GameController gameController;
+    [SerializeField] private ParticleSystem snappedParticles;
+    private ParticleSystemRenderer snappedParticlesSystemRenderer;
 
     [Header("Stress Variables")]
     [Space(5)]
     [Range(20, 200)] public float maxStress = 100f;
     [HideInInspector] public float currentStress;
     [Range(.5f, 2.5f)] public float stressPerSecond = .5f;
+    
 
     private float hurtDelay = .3f;
     private float hurtTimer = 0f;
@@ -21,13 +23,14 @@ public class PlayerCombat : MonoBehaviour
     [Header("UI")]
     [Space(5)]
     [SerializeField] private Image stressMeter;
+    [SerializeField] private RectTransform snapped;
 
     Coroutine increaseStressCoroutine = null;
 
     private void Awake()
     {
+        snappedParticlesSystemRenderer = snappedParticles.GetComponent<ParticleSystemRenderer>();
         currentStress = 0;
-        gameController = GameController.instance;
     }
 
     void Update()
@@ -44,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Trap"))
+        if (collision.CompareTag("Trap") && !hasSnapped)
             IncreaseStress();
     }
 
@@ -65,7 +68,9 @@ public class PlayerCombat : MonoBehaviour
 
         if (currentStress >= maxStress)
         {
-            animator.SetBool("Snapped", true);
+            snapped.gameObject.SetActive(true);
+            
+            snappedParticles.Play();
             hasSnapped = true;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             animator.SetFloat("Speed", 0f);
@@ -75,16 +80,6 @@ public class PlayerCombat : MonoBehaviour
         stressMeter.fillAmount = currentStress / maxStress;
     }
 
-    // Called by the end of the snap animation
-    public void Snapped() => StartCoroutine(RestartGame());
-
-    IEnumerator RestartGame()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        gameController.Restart();
-        Reset();
-    }
-
     IEnumerator IncreaseStressPerSecond(float stressPerSecond)
     {
         yield return new WaitForSeconds(.1f);
@@ -92,12 +87,8 @@ public class PlayerCombat : MonoBehaviour
         increaseStressCoroutine = null;
     }
 
-    public void Reset()
+    public void FlipParticles()
     {
-        currentStress = maxStress;
-        hurtDelay = .7f;
-        hurtTimer = 0f;
-        canBeHurt = true;
-        hasSnapped = false;
+        snappedParticlesSystemRenderer.flip = snappedParticlesSystemRenderer.flip.x == 0 ? Vector3.right : Vector3.zero;
     }
 }
