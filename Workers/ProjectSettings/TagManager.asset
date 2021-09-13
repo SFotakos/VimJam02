@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: NavLayer
+    uniqueID: 3100416265
+    locked: 0
   - name: Background
     uniqueID: 2836039487
     locked: 0

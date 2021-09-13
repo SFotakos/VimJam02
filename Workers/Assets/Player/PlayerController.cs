@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -39,6 +40,10 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;                               // For determining which way the player is currently facing.
     private float originalGravityScale;
 
+    // Snapped Handling
+    private NavMeshAgent agent;
+    [SerializeField] private Transform snappedDestination;
+
     [Header("UI")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
@@ -49,12 +54,23 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         originalGravityScale = playerRigidbody.gravityScale;
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     void Update()
     {
-        if (playerCombat.hasSnapped)
+        if (playerCombat.hasSnapped && isGrounded)
+        {
+            if (!agent.enabled)
+            {
+                playerRigidbody.simulated = false;
+                agent.enabled = true;
+                agent.SetDestination(snappedDestination.position);
+            }
             return;
+        }
 
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
@@ -66,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerCombat.hasSnapped)
+        if (playerCombat.hasSnapped && isGrounded)
             return;
 
         // The player is grounded if a raycast from the groundcheck position hits anything designated as ground.
