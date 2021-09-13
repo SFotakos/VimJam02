@@ -66,12 +66,12 @@ public class PlayerController : MonoBehaviour
         agent.updateUpAxis = false;
         agent.autoTraverseOffMeshLink = false;
         agentLinkMover = GetComponent<AgentLinkMover>();
-        taskManager = GetComponent<TaskManager>();
     }
 
     private void Start()
     {
         gameController = GameController.instance;
+        taskManager = TaskManager.instance;
     }
 
     void Update()
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
             }
         } else if (collision.CompareTag("Box"))
         {
-            if (box == null) 
+            if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION)) 
             {
                 box = collision.gameObject;
                 box.GetComponent<Collider2D>().enabled = false;
