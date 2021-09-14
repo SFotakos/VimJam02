@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     private NavMeshAgent agent;
     private AgentLinkMover agentLinkMover;
+    [SerializeField] private Transform entryDestination;
     [SerializeField] private Transform snappedDestination;
     private Coroutine offMeshLinkMoveCoroutine = null;
 
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         gameController = GameController.instance;
         taskManager = TaskManager.instance;
+        agent.SetDestination(entryDestination.position);
     }
 
     void Update()
@@ -79,11 +81,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
             gameController.Restart();
 
-        if (gameController.snapped && isGrounded)
+        if ((gameController.snapped || !gameController.startedLevel) && isGrounded)
         {
             if (!agent.enabled)
             {
-                playerRigidbody.simulated = false;
+                playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
+                playerRigidbody.gravityScale = 0f;
                 agent.enabled = true;
                 agent.SetDestination(snappedDestination.position);
             }
@@ -125,22 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Entry"))
-        {
-            Debug.Log("EntryReached");
-            if (gameController.snapped)
-            {
-                Debug.Log("Snapped");
-            }
-        }
-        else if (collision.CompareTag("Exit"))
-        {
-            Debug.Log("ExitReached");
-            if (gameController.finishedAllTasks)
-            {
-                Debug.Log("CanLeave");
-            }
-        } else if (collision.CompareTag("Box"))
+        if (collision.CompareTag("Box") && !gameController.snapped)
         {
             if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION)) 
             {
