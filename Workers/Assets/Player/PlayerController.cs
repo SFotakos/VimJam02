@@ -81,15 +81,34 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
             gameController.Restart();
 
+        if (agent.enabled)
+        {
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        agent.enabled = false;
+                    }
+                }
+            }
+        }
+
+        if (isGrounded && !agent.enabled)
+        {
+            if (gameController.snapped)
+                EnableNavMeshMovement(snappedDestination.position);
+            else if (!gameController.startedLevel)
+                EnableNavMeshMovement(entryDestination.position);
+        }
+
+        if (agent.enabled)
+            HandleNavMeshMovement();
+
         if ((gameController.snapped || !gameController.startedLevel) && isGrounded)
         {
-            if (!agent.enabled)
-            {
-                playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
-                playerRigidbody.gravityScale = 0f;
-                agent.enabled = true;
-                agent.SetDestination(snappedDestination.position);
-            }
+            
             HandleNavMeshMovement();
             return;
         }
@@ -173,6 +192,14 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleAnimations(_horizontalMovement, jump, climbing);
+    }
+
+    private void EnableNavMeshMovement(Vector3 destination)
+    {
+        playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
+        playerRigidbody.gravityScale = 0f;
+        agent.enabled = true;
+        agent.SetDestination(destination);
     }
 
     private void HandleNavMeshMovement()

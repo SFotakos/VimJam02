@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 public class LevelEntry : MonoBehaviour
 {
@@ -31,7 +28,6 @@ public class LevelEntry : MonoBehaviour
             if (!gameController.snapped)
             {
                 cameraFollow.enabled = true;
-                collision.GetComponent<NavMeshAgent>().enabled = false;
                 gameController.startedLevel = true;
             }
 
