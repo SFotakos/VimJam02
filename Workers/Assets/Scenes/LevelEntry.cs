@@ -17,7 +17,10 @@ public class LevelEntry : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            cameraFollow.enabled = false;
+            if (gameController.startedLevel && gameController.snapped)
+            {
+                cameraFollow.enabled = false;
+            }
         }
     }
 

@@ -44,20 +44,16 @@ public class DialogDisplay : MonoBehaviour
     private void Start()
     {
         dialogManager = DialogManager.instance;
+        //dialogText.autoSizeTextContainer = true;
     }
 
     private void Update()
     {
         if (IsDialogBeingShown() && Input.anyKeyDown)
-        {
             Continue();
-        }
     }
 
-    private void OnApplicationQuit()
-    {
-        _instance = null;
-    }
+    private void OnApplicationQuit() => _instance = null;
 
     public void ShowDialog(Dialog dialog, bool typewriter = false)
     {
@@ -80,13 +76,15 @@ public class DialogDisplay : MonoBehaviour
             portraitImage.sprite = portraitSprite;
 
         string text = line.text;
-        if (typewriter)
+        if (this.typewriter)
         {
             // This allows for the textInfo to be populated without flashing the whole text on the screen
             dialogText.pageToDisplay = 1;
             dialogText.maxVisibleCharacters = 0;
             dialogText.text = text;
-            dialogText.ForceMeshUpdate(true);
+            // ForceUpdateCanvases was needed because setting the text and forcing the meshUpdate can't happen on the same frame.
+            Canvas.ForceUpdateCanvases();
+            dialogText.ForceMeshUpdate(true, true);            
 
             if (typewriterCoroutine != null)
                 StopCoroutine(typewriterCoroutine);
@@ -126,6 +124,7 @@ public class DialogDisplay : MonoBehaviour
         {
             if (this.typewriter)
             {
+                // If it's the last visible character in the currentPage.
                 if (currentPageLastCharacterIndex == dialogText.maxVisibleCharacters-1)
                 {
                     dialogText.pageToDisplay++;
