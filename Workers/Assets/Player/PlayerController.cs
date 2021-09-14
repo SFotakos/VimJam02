@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -54,10 +55,16 @@ public class PlayerController : MonoBehaviour
     [Header("UI Variables")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
+    [SerializeField] private RectTransform dialog;
+    [SerializeField] private TextMeshProUGUI dialogText;
 
     // Inventory
     private GameObject box = null;
     private TaskManager taskManager;
+
+    // Dialog System
+    private DialogDisplay dialogDisplay;
+    private DialogManager dialogManager;
 
     private void Awake()
     {
@@ -73,6 +80,8 @@ public class PlayerController : MonoBehaviour
     {
         gameController = GameController.instance;
         taskManager = TaskManager.instance;
+        dialogDisplay = DialogDisplay.instance;
+        dialogManager = DialogManager.instance;
         agent.SetDestination(entryDestination.position);
     }
 
@@ -168,6 +177,16 @@ public class PlayerController : MonoBehaviour
                 taskManager.DeliveredBox();
                 box = null;
             }
+        }
+
+        if (collision.CompareTag("Boss"))
+        {
+            if (!gameController.startedLevel)
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true);
+            else if (!gameController.snapped && gameController.finishedAllTasks)
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
+            else if (gameController.snapped)
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
         }
     }
 

@@ -18,6 +18,12 @@ public class GameController : MonoBehaviour
             {
                 _instance = FindObjectOfType<GameController>();
             }
+
+            if (_instance == null)
+            {
+                var obj = new GameObject("GameController");
+                _instance = obj.AddComponent<GameController>();
+            }
             return _instance;
         }
     }

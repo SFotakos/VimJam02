@@ -14,6 +14,12 @@ public class TaskManager : MonoBehaviour
             {
                 _instance = FindObjectOfType<TaskManager>();
             }
+
+            if (_instance == null)
+            {
+                var obj = new GameObject("TaskManager");
+                _instance = obj.AddComponent<TaskManager>();
+            }
             return _instance;
         }
     }

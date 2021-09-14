@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Trap
-  - Entry
   - Exit
   - Box
   - BoxUnloadingArea
+  - Boss
   layers:
   - Default
   - TransparentFX

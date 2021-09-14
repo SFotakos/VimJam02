@@ -1,0 +1,61 @@
+{
+    "dialogs": [
+        {
+            "dialogId": 1,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Hey Boss.",
+                    "speakerId": 1,
+                    "speakerName": "Worker"
+                },
+                {
+                    "lineId": 2,
+                    "text": "Hey <b><color=#00BFAB>Worker</color></b>, about time you arrived.<br>You were <b>on the edge of being fired</b>.<page>Get back to work before I change my mind!",
+                    "speakerId": 2,
+                    "speakerName": "Boss"
+                },
+                {
+                    "lineId": 3,
+                    "text": "Grumpy as always...",
+                    "speakerId": 1,
+                    "speakerName": "Worker"
+                },
+                {
+                    "lineId": 3,
+                    "text": "There are a lot of boxes to haul today, move them to the unloading area and then you can leave.",
+                    "speakerId": 1,
+                    "speakerName": "Worker"
+                }
+            ]
+        },
+        {
+            "dialogId": 2,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "All done for the day boss.",
+                    "speakerId": 1,
+                    "speakerName": "Worker"
+                },
+                {
+                    "lineId": 2,
+                    "text": "Alright <b><color=#00BFAB>Worker</color></b>.<br>Try to arrive on time tomorrow.",
+                    "speakerId": 2,
+                    "speakerName": "Boss"
+                }
+            ]
+        },
+        {
+            "dialogId": 3,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "I'm <b><color=#B7163D>DONE</color></b> with this.<br>I quit!",
+                    "speakerId": 1,
+                    "speakerName": "Worker"
+                }
+            ]
+        }
+    ]
+}
