@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [Range(150f, 400f)] [SerializeField] private float movementSpeed = 300f;        // Movement multiplier to the horizontal axis.
     [Range(100f, 200f)] [SerializeField] private float climbingSpeed = 200f;        // Climbing multiplier for the climbing movement.
     [Range(200f, 800f)] [SerializeField] private float jumpForce = 400f;            // Amount of force added when the player jumps.
-    
+
     private float horizontalMovement = 0f;
     private float verticalMovement = 0f;
     private bool shouldJump = false;
@@ -49,14 +49,13 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent agent;
     private AgentLinkMover agentLinkMover;
     [SerializeField] private Transform entryDestination;
+    [SerializeField] private Transform exitDestination;
     [SerializeField] private Transform snappedDestination;
     private Coroutine offMeshLinkMoveCoroutine = null;
 
     [Header("UI Variables")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
-    [SerializeField] private RectTransform dialog;
-    [SerializeField] private TextMeshProUGUI dialogText;
 
     // Inventory
     private GameObject box = null;
@@ -110,14 +109,15 @@ public class PlayerController : MonoBehaviour
                 EnableNavMeshMovement(snappedDestination.position);
             else if (!gameController.startedLevel)
                 EnableNavMeshMovement(entryDestination.position);
+            else if (gameController.finishedAllTasks)
+                EnableNavMeshMovement(exitDestination.position);
         }
 
         if (agent.enabled)
             HandleNavMeshMovement();
 
-        if ((gameController.snapped || !gameController.startedLevel) && isGrounded)
+        if ((gameController.snapped || !gameController.startedLevel || gameController.finishedAllTasks) && isGrounded)
         {
-            
             HandleNavMeshMovement();
             return;
         }
@@ -156,9 +156,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Box") && !gameController.snapped)
+        if (collision.CompareTag("Box") && !gameController.snapped && !gameController.finishedAllTasks)
         {
-            if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION)) 
+            if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION))
             {
                 box = collision.gameObject;
                 box.GetComponent<Collider2D>().enabled = false;
@@ -166,8 +166,9 @@ public class PlayerController : MonoBehaviour
                 carriedItemImage.enabled = true;
                 box.SetActive(false);
             }
-            
-        } else if (collision.CompareTag("BoxUnloadingArea"))
+
+        }
+        else if (collision.CompareTag("BoxUnloadingArea"))
         {
             if (box != null)
             {
@@ -241,10 +242,10 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetBool("IsClimbing", climbing);
 
-        if (!climbing) 
+        if (!climbing)
             animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
 
-        if (isGrounded) 
+        if (isGrounded)
             animator.SetBool("IsJumping", false);
 
         //Flip player

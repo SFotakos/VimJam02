@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LevelEntry : MonoBehaviour
+public class LevelExit : MonoBehaviour
 {
     Camera cam;
     CameraFollow cameraFollow;
@@ -17,7 +17,8 @@ public class LevelEntry : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            cameraFollow.enabled = false;
+            if (gameController.finishedAllTasks)
+                cameraFollow.enabled = false;
         }
     }
 
@@ -25,12 +26,7 @@ public class LevelEntry : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (!gameController.startedLevel)
-            {
-                cameraFollow.enabled = true;
-                gameController.startedLevel = true;
-            }
-
+            Debug.Log("loadNewDay");
         }
     }
 }
