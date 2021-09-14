@@ -35,16 +35,10 @@ public class TaskManager : MonoBehaviour
     private List<Task> tasks = new List<Task>();
     private bool finishedAllTasks = false;
 
-    private void Awake()
-    {
-        GenerateTasks();
-        tasksUI.gameObject.SetActive(tasks.Count != 0);
-    }
-
     private void Start()
     {
         gameController = GameController.instance;
-        gameController.finishedAllTasks = tasks.Count == 0;
+        gameController.finishedAllTasks = false;
     }
 
     public void DeliveredBox()
@@ -81,11 +75,24 @@ public class TaskManager : MonoBehaviour
         return false;
     }
 
-    private void GenerateTasks()
+    public void GenerateTasks()
     {
-        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
-        //CreateTaskEntry(Task.TaskType.MOPPING, 2);
-        //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 5);
+        switch (gameController.dayController)
+        {
+            case GameController.DayEnum.FIRST:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                break;
+            case GameController.DayEnum.SECOND:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
+                //CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                break;
+            case GameController.DayEnum.THIRD:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 7);
+                //CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
+                break;
+        }
+        tasksUI.gameObject.SetActive(tasks.Count != 0);
     }
 
     private void CreateTaskEntry(Task.TaskType taskType, int requiredAmount)

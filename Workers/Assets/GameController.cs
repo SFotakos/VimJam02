@@ -9,6 +9,14 @@ public class GameController : MonoBehaviour
     public bool finishedAllTasks = false;
     public bool startedLevel = false;
 
+    public enum DayEnum
+    {
+        FIRST,
+        SECOND,
+        THIRD
+    }
+    public DayEnum dayController = DayEnum.FIRST;
+
     private static GameController _instance;
     public static GameController instance
     {

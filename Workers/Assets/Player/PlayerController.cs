@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                     {
+                        agent.isStopped = true;
                         agent.enabled = false;
                     }
                 }
@@ -183,7 +184,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Boss"))
         {
             if (!gameController.startedLevel)
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true);
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
             else if (!gameController.snapped && gameController.finishedAllTasks)
                 dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
             else if (gameController.snapped)

@@ -21,6 +21,7 @@ public class DialogDisplay : MonoBehaviour
     // Dialog
     private DialogManager dialogManager;
     private Dialog currentDialog;
+    private System.Action dialogEndedCallback;
 
     private static DialogDisplay _instance = null;
     public static DialogDisplay instance
@@ -44,7 +45,6 @@ public class DialogDisplay : MonoBehaviour
     private void Start()
     {
         dialogManager = DialogManager.instance;
-        //dialogText.autoSizeTextContainer = true;
     }
 
     private void Update()
@@ -55,8 +55,9 @@ public class DialogDisplay : MonoBehaviour
 
     private void OnApplicationQuit() => _instance = null;
 
-    public void ShowDialog(Dialog dialog, bool typewriter = false)
+    public void ShowDialog(Dialog dialog, bool typewriter = false, System.Action dialogEndedCallback = null)
     {
+        this.dialogEndedCallback = dialogEndedCallback;
         currentDialog = dialog;
         dialogUI.SetActive(true);
         this.typewriter = typewriter;
@@ -100,8 +101,12 @@ public class DialogDisplay : MonoBehaviour
 
     public void HideDialog()
     {
+        if (dialogEndedCallback != null)
+            dialogEndedCallback.Invoke();
+
         if (typewriterCoroutine != null)
             StopCoroutine(typewriterCoroutine);
+
         dialogText.text = "";
         dialogText.pageToDisplay = 1;
         dialogUI.SetActive(false);
