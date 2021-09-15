@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
-{ 
+{
     private static TaskManager _instance;
     public static TaskManager instance
     {
@@ -39,6 +37,11 @@ public class TaskManager : MonoBehaviour
     {
         gameController = GameController.instance;
         gameController.finishedAllTasks = false;
+
+        if (gameController.GetSceneType() == GameController.SceneType.STRESS_TUTORIAL)
+        {
+            GenerateTasks();
+        }
     }
 
     public void DeliveredBox()
@@ -79,6 +82,12 @@ public class TaskManager : MonoBehaviour
     {
         switch (gameController.dayController)
         {
+            case GameController.DayEnum.BOXES_TUTORIAL:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                break;
+            case GameController.DayEnum.STRESS_TUTORIAL:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
+                break;
             case GameController.DayEnum.FIRST:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
                 break;
@@ -90,6 +99,9 @@ public class TaskManager : MonoBehaviour
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 7);
                 //CreateTaskEntry(Task.TaskType.MOPPING, 2);
                 //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
+                break;
+            default:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                 break;
         }
         tasksUI.gameObject.SetActive(tasks.Count != 0);

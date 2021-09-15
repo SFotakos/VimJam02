@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
 
     public enum DayEnum
     {
+        BOXES_TUTORIAL,
+        STRESS_TUTORIAL,
         FIRST,
         SECOND,
         THIRD

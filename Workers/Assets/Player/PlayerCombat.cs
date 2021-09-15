@@ -14,8 +14,7 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector] public float currentStress;
     [Range(.5f, 2.5f)] public float stressPerSecond = .5f;
     
-
-    private float hurtDelay = .3f;
+    private float hurtDelay = .6f;
     private float hurtTimer = 0f;
     private bool canBeHurt = true;
 
