@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -157,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.CompareTag("Box") && !gameController.snapped && !gameController.finishedAllTasks)
         {
             if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION))
@@ -167,10 +167,10 @@ public class PlayerController : MonoBehaviour
                 carriedItemImage.enabled = true;
                 box.SetActive(false);
             }
-
         }
-        else if (collision.CompareTag("BoxUnloadingArea"))
+        else if (collision.CompareTag("OrangeGuy"))
         {
+            StartDialog();
             if (box != null)
             {
                 carriedItemImage.enabled = false;
@@ -180,28 +180,34 @@ public class PlayerController : MonoBehaviour
                 box = null;
             }
         }
+        else if (collision.CompareTag("Boss"))
+            StartDialog();
+        else if (collision.CompareTag("DeathBox"))
+            gameController.RestartScene();
 
-        if (collision.CompareTag("Boss"))
+    }
+
+    private void StartDialog()
+    {
+        switch (gameController.GetSceneType())
         {
-            switch(gameController.GetSceneType())
-            {
-                case GameController.SceneType.BOXES_TUTORIAL:
-                    if (!gameController.startedLevel)
-                        dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
-                    break;
-                case GameController.SceneType.FACTORY:
-
-                    break;
-                default:
-                    if (!gameController.startedLevel)
-                        dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
-                    else if (!gameController.snapped && gameController.finishedAllTasks)
-                        dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
-                    else if (gameController.snapped)
-                        dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
-                    break;
-            }
-
+            case GameController.SceneType.BOXES_TUTORIAL:
+                if (!gameController.startedLevel)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
+                break;
+            case GameController.SceneType.STRESS_TUTORIAL:
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true, taskManager.GenerateTasks);
+                break;
+            case GameController.SceneType.FACTORY:
+                break;
+            default:
+                if (!gameController.startedLevel)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
+                else if (!gameController.snapped && gameController.finishedAllTasks)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
+                else if (gameController.snapped)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
+                break;
         }
     }
 

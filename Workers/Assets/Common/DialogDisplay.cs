@@ -57,6 +57,9 @@ public class DialogDisplay : MonoBehaviour
 
     public void ShowDialog(Dialog dialog, bool typewriter = false, System.Action dialogEndedCallback = null)
     {
+        if (dialog.read)
+            return;
+
         this.dialogEndedCallback = dialogEndedCallback;
         currentDialog = dialog;
         dialogUI.SetActive(true);

@@ -7,9 +7,9 @@ TagManager:
   - Trap
   - Exit
   - Box
-  - BoxUnloadingArea
   - Boss
   - OrangeGuy
+  - DeathBox
   layers:
   - Default
   - TransparentFX

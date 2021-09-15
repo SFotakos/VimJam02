@@ -25,26 +25,33 @@
             "lines": [
                 {
                     "lineId": 1,
-                    "text": "All done for the day boss.",
-                    "speakerId": 1,
-                    "speakerName": "Worker"
+                    "text": "Hey, you're the new <b><color=#00BFAB>Worker</color></b>!<br>How is it going so far?",
+                    "speakerId": 2
                 },
                 {
                     "lineId": 2,
-                    "text": "Alright <b><color=#00BFAB>Worker</color></b>.<br>Try to arrive on time tomorrow.",
-                    "speakerId": 2,
-                    "speakerName": "Boss"
-                }
-            ]
-        },
-        {
-            "dialogId": 3,
-            "lines": [
+                    "text": "Oh, everything fine I guess...",
+                    "speakerId": 1
+                },
                 {
-                    "lineId": 1,
-                    "text": "I'm <b><color=#B7163D>DONE</color></b> with this.<br>I quit!",
-                    "speakerId": 1,
-                    "speakerName": "Worker"
+                    "lineId": 3,
+                    "text": "This work is <b>hard</b>...<br>A tip for you, pay attention to your <b><color=#FF003F>stress</color></b> level.<br>I've seen a lot of workers <b><color=#C8AC18>on the edge</color></b> in this hellhole.",
+                    "speakerId": 2
+                },
+                {
+                    "lineId": 4,
+                    "text": "Yeah, I can imagine <i>why</i>...",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 5,
+                    "text": "And try to be safe. There are tons of <b><color=#FF003F>dangerous machines</color></b> over here.<br>It's a stressful place.",
+                    "speakerId": 2
+                },
+                {
+                    "lineId": 6,
+                    "text": "I'll keep that in mind.<br><b>Thanks!</b>",
+                    "speakerId": 1
                 }
             ]
         }

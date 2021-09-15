@@ -53,8 +53,6 @@ public class DialogManager : MonoBehaviour
         {
             if (id != -1 && dialog.dialogId == id)
                 return dialog;
-            else if (id == -1 && !dialog.read)
-                return dialog;
         }
         return null;
     }
