@@ -26,7 +26,8 @@ public class LevelExit : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            gameController.NextScene();
+            if (gameController.finishedAllTasks)
+                gameController.NextScene();
         }
     }
 }

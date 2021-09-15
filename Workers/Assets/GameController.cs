@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour
     public void NextScene()
     {
         int index = SceneManager.GetActiveScene().buildIndex;
-        if (index <= SceneManager.sceneCount)
+        if (index < SceneManager.sceneCount)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         else
             RestartScene();
