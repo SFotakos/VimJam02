@@ -9,6 +9,7 @@ TagManager:
   - Box
   - BoxUnloadingArea
   - Boss
+  - OrangeGuy
   layers:
   - Default
   - TransparentFX

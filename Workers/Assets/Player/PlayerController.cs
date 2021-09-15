@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(ladderCheck.position, (Vector2)ladderCheck.position + Vector2.up * ladderCheckDistance, Color.red);
         }
 
-        if (gameController.snapped)
+        if (gameController.snapped || !gameController.startedLevel || gameController.finishedAllTasks)
             return;
 
         Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
             if (box != null)
             {
                 carriedItemImage.enabled = false;
-                BoxUnloadingArea boxUnloadingArea = collision.GetComponent<BoxUnloadingArea>();
+                BoxUnloadingArea boxUnloadingArea = collision.GetComponentInParent<BoxUnloadingArea>();
                 boxUnloadingArea.AddBox(box);
                 taskManager.DeliveredBox();
                 box = null;

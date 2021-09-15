@@ -25,15 +25,7 @@ public class Task : MonoBehaviour
     [SerializeField]
     private Sprite moneySprite;
 
-    public Task(TaskType taskType, int taskAmount, Sprite taskIcon)
-    {
-        this.taskType = taskType;
-        this.requiredTaskAmount = taskAmount;
-        this.taskImage.sprite = taskIcon;
-        this.taskText.text = completedTaskAmount + "/" + requiredTaskAmount;
-    }
-
-    public void InitializeTask(Task.TaskType taskType, int requiredTaskAmount)
+    public void InitializeTask(TaskType taskType, int requiredTaskAmount)
     {
         this.taskType = taskType;
         this.requiredTaskAmount = requiredTaskAmount;
@@ -49,6 +41,7 @@ public class Task : MonoBehaviour
                 taskImage.sprite = moneySprite;
                 break;
         }
+        this.taskText.text = completedTaskAmount + "/" + requiredTaskAmount;
     }
 
     public void TaskProgress()
