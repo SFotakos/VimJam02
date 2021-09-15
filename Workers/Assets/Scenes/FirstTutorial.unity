@@ -655,6 +655,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8412847018723011374, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412847018723011374, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412847019165777324, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc5c1bcc1d649b4e95211ed6577ecf7, type: 3}
 --- !u!1001 &1132253820

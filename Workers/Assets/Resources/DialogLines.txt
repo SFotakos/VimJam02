@@ -5,27 +5,18 @@
             "lines": [
                 {
                     "lineId": 1,
-                    "text": "Hey Boss.",
-                    "speakerId": 1,
-                    "speakerName": "Worker"
+                    "text": "Well, you must be the new <b><color=#00BFAB>Worker</color></b> that the crappy <i>Human Resource</i> team hired.<br>I hope you last more than the others <i>idiots</i> they hired before you.<page>I'm the <b><color=#FF003F>Boss</b></color> at this site.<page>You'll be responsible for the organization of this place.<br>Take all the <b><color=#C8AC18>boxes</b></color> and give them to the <b><color=#C8AC18>guy in orange</color></b>...can't remember his name...<page>Also be sure to <b><color=#C8AC18>mop</color></b> this place clean.<br>I don't wanna see any mess here.<page>You can end your training after you've finished carrying those <b><color=#C8AC18>boxes</color></b>.<br><b>Any questions?</b>",
+                    "speakerId": 2
                 },
                 {
                     "lineId": 2,
-                    "text": "Hey <b><color=#00BFAB>Worker</color></b>, about time you arrived.<br>You were <b>on the edge of being fired</b>.<page>Get back to work before I change my mind!",
-                    "speakerId": 2,
-                    "speakerName": "Boss"
+                    "text": "Hum...I don't think so.",
+                    "speakerId": 1
                 },
                 {
                     "lineId": 3,
-                    "text": "Grumpy as always...",
-                    "speakerId": 1,
-                    "speakerName": "Worker"
-                },
-                {
-                    "lineId": 3,
-                    "text": "There are a lot of boxes to haul today.<br>Move them to the unloading area and then you can leave.",
-                    "speakerId": 1,
-                    "speakerName": "Worker"
+                    "text": "<b>Good</b>. So, enough talking.<br>Now, go do your <i>things</i>...",
+                    "speakerId": 2
                 }
             ]
         },
