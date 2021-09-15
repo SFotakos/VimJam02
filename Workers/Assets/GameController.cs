@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
         //LockCursor();
     }
 
-    public void Restart()
+    public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
@@ -96,8 +96,21 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
+    public void NextScene()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        if (index <= SceneManager.sceneCount)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        else
+            RestartScene();
+    }
+
     public SceneType GetSceneType()
     {
-        return (SceneType) SceneManager.GetActiveScene().buildIndex;
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name.Equals("TestScene"))
+            return (SceneType) 99;
+        else 
+            return (SceneType) scene.buildIndex;
     }
 }

@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Cancel"))
-            gameController.Restart();
+            gameController.RestartScene();
 
         if (agent.enabled)
         {

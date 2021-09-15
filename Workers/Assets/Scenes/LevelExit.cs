@@ -26,7 +26,7 @@ public class LevelExit : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("loadNewDay");
+            gameController.NextScene();
         }
     }
 }
