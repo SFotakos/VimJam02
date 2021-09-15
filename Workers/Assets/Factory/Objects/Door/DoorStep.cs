@@ -9,6 +9,7 @@ public class DoorStep : MonoBehaviour
     private GameController gameController;
     [SerializeField]
     private Collider2D doorCollider;
+    public bool ignoreFinishedAllTasks = false;
   
     private void Start()
     {
@@ -33,7 +34,7 @@ public class DoorStep : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (gameController.finishedAllTasks)
+            if (gameController.finishedAllTasks || ignoreFinishedAllTasks)
                 OpenDoor();
         }
     }
