@@ -32,6 +32,9 @@ public class LevelEntry : MonoBehaviour
             {
                 cameraFollow.enabled = true;
                 gameController.startedLevel = true;
+            } else if (gameController.startedLevel && gameController.snapped)
+            {
+                gameController.RestartScene();
             }
         }
     }

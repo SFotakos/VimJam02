@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public bool finishedAllTasks = false;
     public bool startedLevel = false;
     public bool isTutorial = false;
+    public bool disableStress { get { return (GetSceneType() == SceneType.STRESS_TUTORIAL || snapped || finishedAllTasks); } }
 
     public enum DayEnum
     {

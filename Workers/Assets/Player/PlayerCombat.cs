@@ -58,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void IncreaseStress(float damage = 5, bool respectInvincibility = true, bool visualFeedback = true)
     {
-        if (!gameController.startedLevel || gameController.snapped || gameController.finishedAllTasks)
+        if (!gameController.disableStress)
             return;
 
         if (respectInvincibility && !canBeHurt)

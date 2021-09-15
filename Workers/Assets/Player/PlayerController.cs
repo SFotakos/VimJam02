@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
                     dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
                 break;
             case GameController.SceneType.STRESS_TUTORIAL:
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true, taskManager.GenerateTasks);
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
                 break;
             case GameController.SceneType.FACTORY:
                 break;

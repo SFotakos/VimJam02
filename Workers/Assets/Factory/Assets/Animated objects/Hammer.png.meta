@@ -126,7 +126,7 @@ TextureImporter:
       name: Hammer_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
         width: 32
         height: 64
@@ -147,7 +147,7 @@ TextureImporter:
       name: Hammer_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 0
         width: 32
         height: 64
@@ -168,7 +168,7 @@ TextureImporter:
       name: Hammer_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 67
         y: 0
         width: 32
         height: 64
@@ -189,7 +189,7 @@ TextureImporter:
       name: Hammer_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 100
         y: 0
         width: 32
         height: 64
@@ -210,7 +210,7 @@ TextureImporter:
       name: Hammer_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 133
         y: 0
         width: 32
         height: 64
@@ -231,7 +231,7 @@ TextureImporter:
       name: Hammer_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 166
         y: 0
         width: 32
         height: 64
@@ -252,7 +252,7 @@ TextureImporter:
       name: Hammer_6
       rect:
         serializedVersion: 2
-        x: 192
+        x: 199
         y: 0
         width: 32
         height: 64
@@ -273,7 +273,7 @@ TextureImporter:
       name: Hammer_7
       rect:
         serializedVersion: 2
-        x: 224
+        x: 232
         y: 0
         width: 32
         height: 64

@@ -2026,14 +2026,14 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6344560535567076322}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3227963809366053426 stripped
+--- !u!114 &3227963809540423237 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8412847018902591952, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+  m_CorrespondingSourceObject: {fileID: 8412847018460394919, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
     type: 3}
   m_PrefabInstance: {fileID: 6344560535567076322}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2236,7 +2236,7 @@ PrefabInstance:
         type: 3}
       propertyPath: carriedItemImage
       value: 
-      objectReference: {fileID: 3227963809366053426}
+      objectReference: {fileID: 3227963809540423237}
     - target: {fileID: 6428008354333446319, guid: c3635c38430ec4948815e120f6962598,
         type: 3}
       propertyPath: entryDestination
