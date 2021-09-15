@@ -183,12 +183,32 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
-            if (!gameController.startedLevel)
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
-            else if (!gameController.snapped && gameController.finishedAllTasks)
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
-            else if (gameController.snapped)
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
+            switch(gameController.GetSceneType())
+            {
+                case GameController.SceneType.BOXES_TUTORIAL:
+                    if (!gameController.startedLevel)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
+                    else if (!gameController.snapped && gameController.finishedAllTasks)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
+                    else if (gameController.snapped)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
+                    break;
+                case GameController.SceneType.STRESS_TUTORIAL:
+
+                    break;
+                case GameController.SceneType.FACTORY:
+
+                    break;
+                default:
+                    if (!gameController.startedLevel)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
+                    else if (!gameController.snapped && gameController.finishedAllTasks)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
+                    else if (gameController.snapped)
+                        dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true);
+                    break;
+            }
+
         }
     }
 

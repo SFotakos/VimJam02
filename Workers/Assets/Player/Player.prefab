@@ -4992,6 +4992,8 @@ MonoBehaviour:
   ladderCheck: {fileID: 549100581270013718}
   ladderCheckDistance: 0.15
   facingRight: 1
+  entryDestination: {fileID: 0}
+  exitDestination: {fileID: 0}
   snappedDestination: {fileID: 0}
   carriedItemImage: {fileID: 0}
 --- !u!114 &7533974098364525228
@@ -5035,7 +5037,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6428008354333446317}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 5

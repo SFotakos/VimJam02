@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public bool snapped = false;
     public bool finishedAllTasks = false;
     public bool startedLevel = false;
+    public bool isTutorial = false;
 
     public enum DayEnum
     {
@@ -16,6 +17,13 @@ public class GameController : MonoBehaviour
         THIRD
     }
     public DayEnum dayController = DayEnum.FIRST;
+
+    public enum SceneType
+    {
+        BOXES_TUTORIAL,
+        STRESS_TUTORIAL,
+        FACTORY
+    }
 
     private static GameController _instance;
     public static GameController instance
@@ -39,6 +47,9 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _instance = FindObjectOfType<GameController>();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            isTutorial = true;
+
         //LockCursor();
     }
 
@@ -83,5 +94,10 @@ public class GameController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public SceneType GetSceneType()
+    {
+        return (SceneType) SceneManager.GetActiveScene().buildIndex;
     }
 }
