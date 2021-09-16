@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - OrangeGuy
   - DeathBox
+  - Mop
   layers:
   - Default
   - TransparentFX
