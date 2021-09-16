@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                 carriedItemImage.enabled = false;
                 BoxUnloadingArea boxUnloadingArea = collision.GetComponentInParent<BoxUnloadingArea>();
                 boxUnloadingArea.AddBox(box);
-                taskManager.DeliveredBox();
+                taskManager.DoTask(Task.TaskType.BOX_COLLECTION);
                 box = null;
             }
         }
@@ -199,12 +199,23 @@ public class PlayerController : MonoBehaviour
                 dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
                 break;
             case GameController.SceneType.FACTORY:
-                if (!gameController.startedLevel)
-                    dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true, taskManager.GenerateTasks);
-                else if (gameController.finishedAllTasks && !gameController.snapped)
-                    dialogDisplay.ShowDialog(dialogManager.GetDialog(4), true, taskManager.GenerateTasks);
-                else if (!gameController.finishedAllTasks && gameController.snapped)
-                    dialogDisplay.ShowDialog(dialogManager.GetDialog(5), true, taskManager.GenerateTasks);
+                switch (gameController.currentDay)
+                {
+                    case GameController.DayEnum.FIRST:
+                        if (!gameController.startedLevel)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true, taskManager.GenerateTasks);
+                        else if (gameController.finishedAllTasks && !gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(4), true);
+                        else if (!gameController.finishedAllTasks && gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(5), true);
+                        break;
+                    case GameController.DayEnum.SECOND:
+                        break;
+                    case GameController.DayEnum.THIRD:
+                        break;
+                    case GameController.DayEnum.FOURTH:
+                        break;
+                }
                 break;
             default:
                 if (!gameController.startedLevel)

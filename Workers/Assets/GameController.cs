@@ -13,13 +13,12 @@ public class GameController : MonoBehaviour
 
     public enum DayEnum
     {
-        BOXES_TUTORIAL,
-        STRESS_TUTORIAL,
         FIRST,
         SECOND,
-        THIRD
+        THIRD,
+        FOURTH
     }
-    public DayEnum dayController = DayEnum.FIRST;
+    public DayEnum currentDay;
 
     public enum SceneType
     {
@@ -50,10 +49,14 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _instance = FindObjectOfType<GameController>();
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName.ToLower().Contains("tutorial"))
             isTutorial = true;
 
         //LockCursor();
+
+        string currentDayString = PlayerPrefs.GetString("CurrentDay");
+        currentDay = !string.IsNullOrEmpty(currentDayString) ? (DayEnum) System.Enum.Parse(typeof(DayEnum), currentDayString) : DayEnum.FIRST;
     }
 
     public void RestartScene()
@@ -101,11 +104,23 @@ public class GameController : MonoBehaviour
 
     public void NextScene()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
         int index = SceneManager.GetActiveScene().buildIndex;
-        if (index < SceneManager.sceneCount)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-        else
-            RestartScene();
+        if (currentScene.name.ToLower().Contains("tutorial"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        } else if (currentScene.name.ToLower().Contains("factory"))
+        {
+            if (currentDay != DayEnum.FOURTH)
+            {
+                currentDay++;
+                SavePrefs();
+                RestartScene();
+            } else
+            {
+                //SceneManager.LoadScene("CreditsScene");
+            }
+        } 
     }
 
     public SceneType GetSceneType()
@@ -115,5 +130,10 @@ public class GameController : MonoBehaviour
             return (SceneType) 99;
         else 
             return (SceneType) scene.buildIndex;
+    }
+
+    private void SavePrefs()
+    {
+        PlayerPrefs.SetString("CurrentDay", currentDay.ToString());
     }
 }

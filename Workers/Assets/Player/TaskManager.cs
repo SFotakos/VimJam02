@@ -31,7 +31,6 @@ public class TaskManager : MonoBehaviour
     private GameObject taskEntry;
 
     private List<Task> tasks = new List<Task>();
-    private bool finishedAllTasks = false;
 
     private void Start()
     {
@@ -44,23 +43,14 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    public void DeliveredBox()
+    public void DoTask(Task.TaskType taskType)
     {
-        Task toBeRemovedTask = null;
         foreach (Task task in tasks)
         {
-            if (task.taskType == Task.TaskType.BOX_COLLECTION)
+            if (task.taskType == taskType)
             {
                 task.TaskProgress();
-                if (task.completedTaskAmount == task.requiredTaskAmount)
-                    toBeRemovedTask = task;
             }
-        }
-
-        if (toBeRemovedTask != null)
-        {
-            Destroy(toBeRemovedTask.gameObject);
-            tasks.Remove(toBeRemovedTask);
         }
 
         UpdateTaskCompletion();
@@ -80,30 +70,38 @@ public class TaskManager : MonoBehaviour
 
     public void GenerateTasks()
     {
-        switch (gameController.dayController)
+        switch (gameController.GetSceneType())
         {
-            case GameController.DayEnum.BOXES_TUTORIAL:
+            case GameController.SceneType.BOXES_TUTORIAL:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                 break;
-            case GameController.DayEnum.STRESS_TUTORIAL:
+            case GameController.SceneType.STRESS_TUTORIAL:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 2);
                 break;
-            case GameController.DayEnum.FIRST:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
-                break;
-            case GameController.DayEnum.SECOND:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
-                //CreateTaskEntry(Task.TaskType.MOPPING, 2);
-                break;
-            case GameController.DayEnum.THIRD:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 6);
-                //CreateTaskEntry(Task.TaskType.MOPPING, 3);
-                //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
+            case GameController.SceneType.FACTORY:
+                switch (gameController.currentDay)
+                {
+                    case GameController.DayEnum.FIRST:
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
+                        break;
+                    case GameController.DayEnum.SECOND:
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
+                        //CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                        break;
+                    case GameController.DayEnum.THIRD:
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 6);
+                        //CreateTaskEntry(Task.TaskType.MOPPING, 3);
+                        //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
+                        break;
+                    case GameController.DayEnum.FOURTH:
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                        break;
+                }
                 break;
             default:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                 break;
-        }
+        }        
         tasksUI.gameObject.SetActive(tasks.Count != 0);
     }
 
@@ -117,9 +115,11 @@ public class TaskManager : MonoBehaviour
 
     private void UpdateTaskCompletion()
     {
-        tasksUI.gameObject.SetActive(tasks.Count != 0);
-
-        finishedAllTasks = tasks.Count == 0;
-        gameController.finishedAllTasks = this.finishedAllTasks;
+        bool _finishedAllTasks = true;
+        foreach (Task task in tasks) {
+            if (task.completedTaskAmount != task.requiredTaskAmount)
+                _finishedAllTasks = false;
+        }
+        gameController.finishedAllTasks = _finishedAllTasks;
     }
 }
