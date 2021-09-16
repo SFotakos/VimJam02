@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    enum PlayerSprite { CoolGlasses, PinkHair }
+
     [Header("Components")]
     [Space(5)]
     [SerializeField] private Rigidbody2D playerRigidbody;
@@ -56,12 +58,6 @@ public class PlayerController : MonoBehaviour
     [Header("UI Variables")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
-         
-    enum PlayerSprite
-    {
-        CoolGlasses,
-        PinkHair
-    }
 
     // Inventory
     private GameObject box = null;
@@ -70,6 +66,9 @@ public class PlayerController : MonoBehaviour
     // Dialog System
     private DialogDisplay dialogDisplay;
     private DialogManager dialogManager;
+
+    [HideInInspector] public bool disableInput = false;
+    [HideInInspector] public bool disableMovement = false;
 
     private void Awake()
     {
@@ -96,19 +95,13 @@ public class PlayerController : MonoBehaviour
             gameController.RestartScene();
 
         if (agent.enabled)
-        {
             if (!agent.pathPending)
-            {
                 if (agent.remainingDistance <= agent.stoppingDistance)
-                {
                     if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                     {
                         agent.isStopped = true;
                         agent.enabled = false;
                     }
-                }
-            }
-        }
 
         if (isGrounded && !agent.enabled)
         {
@@ -120,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 EnableNavMeshMovement(exitDestination.position);
         }
 
-        if (agent.enabled)
+        if (agent.enabled || disableInput)
         {
             HandleNavMeshMovement();
             return;
@@ -135,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        var alternativeSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + ((PlayerSprite) gameController.GetPlayerSprite()).ToString());
+        var alternativeSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + ((PlayerSprite)gameController.GetPlayerSprite()).ToString());
 
         foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
         {
@@ -164,7 +157,13 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(ladderCheck.position, (Vector2)ladderCheck.position + Vector2.up * ladderCheckDistance, Color.red);
         }
 
-        if (gameController.snapped || !gameController.startedLevel || gameController.finishedAllTasks)
+        if (disableMovement)
+        {
+            Move(0f, 0f, false);
+            return;
+        }
+
+        if (agent.enabled)
             return;
 
         Move(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime, shouldJump);
@@ -173,7 +172,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.CompareTag("Box") && !gameController.snapped && !gameController.finishedAllTasks && gameController.startedLevel)
         {
             if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION))
@@ -197,11 +195,23 @@ public class PlayerController : MonoBehaviour
                 box = null;
             }
         }
+        else if (collision.CompareTag("Mop"))
+        {
+            if (taskManager.hasTaskOfType(Task.TaskType.MOPPING))
+            {
+                Mop mop = collision.gameObject.GetComponent<Mop>();
+                if (!mop.hasMopped)
+                {
+                    disableInput = true;
+                    disableMovement = true;
+                    mop.StartMopping(FinishedMopping);
+                }
+            }
+        }
         else if (collision.CompareTag("Boss"))
             StartDialog();
         else if (collision.CompareTag("DeathBox"))
             gameController.RestartScene();
-
     }
 
     private void StartDialog()
@@ -358,5 +368,12 @@ public class PlayerController : MonoBehaviour
         offMeshLinkMoveCoroutine = null;
         disableGroundCheck = false;
         yield return null;
+    }
+
+    public void FinishedMopping()
+    {
+        disableInput = false;
+        disableMovement = false;
+        taskManager.DoTask(Task.TaskType.MOPPING);
     }
 }

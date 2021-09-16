@@ -4996,6 +4996,8 @@ MonoBehaviour:
   exitDestination: {fileID: 0}
   snappedDestination: {fileID: 0}
   carriedItemImage: {fileID: 0}
+  disableInput: 0
+  disableMovement: 0
 --- !u!114 &7533974098364525228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5010,9 +5012,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 56230989023841181}
   snappedParticles: {fileID: 1239720313}
-  maxStress: 100
+  maxStress: 80
   currentStress: 0
-  stressPerSecond: 0.5
+  stressPerSecond: 0.75
   stressMeter: {fileID: 0}
   snapped: {fileID: 0}
 --- !u!114 &3174081677233490329

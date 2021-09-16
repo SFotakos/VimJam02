@@ -60,7 +60,7 @@ public class TaskManager : MonoBehaviour
     {
         foreach (Task task in tasks)
         {
-            if (task.taskType == taskType)
+            if (task.taskType == taskType && task.completedTaskAmount < task.requiredTaskAmount)
             {
                 return true;
             }
@@ -86,11 +86,11 @@ public class TaskManager : MonoBehaviour
                         break;
                     case GameController.DayEnum.SECOND:
                         CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
-                        //CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                        CreateTaskEntry(Task.TaskType.MOPPING, 2);
                         break;
                     case GameController.DayEnum.THIRD:
                         CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 6);
-                        //CreateTaskEntry(Task.TaskType.MOPPING, 3);
+                        CreateTaskEntry(Task.TaskType.MOPPING, 3);
                         //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
                         break;
                     case GameController.DayEnum.FOURTH:
