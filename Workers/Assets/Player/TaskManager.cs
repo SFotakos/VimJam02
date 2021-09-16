@@ -83,21 +83,21 @@ public class TaskManager : MonoBehaviour
         switch (gameController.dayController)
         {
             case GameController.DayEnum.BOXES_TUTORIAL:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
-                break;
-            case GameController.DayEnum.STRESS_TUTORIAL:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                 break;
+            case GameController.DayEnum.STRESS_TUTORIAL:
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 2);
+                break;
             case GameController.DayEnum.FIRST:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                 break;
             case GameController.DayEnum.SECOND:
                 CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
                 //CreateTaskEntry(Task.TaskType.MOPPING, 2);
                 break;
             case GameController.DayEnum.THIRD:
-                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 7);
-                //CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 6);
+                //CreateTaskEntry(Task.TaskType.MOPPING, 3);
                 //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
                 break;
             default:
