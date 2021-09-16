@@ -316,15 +316,6 @@ public class PlayerController : MonoBehaviour
         playerCombat.FlipParticles();
     }
 
-    public void InstantKill() => playerCombat.IncreaseStress(playerCombat.maxStress);
-
-    private void Reset()
-    {
-        // Reset game
-        transform.position = Vector2.zero;
-        animator.SetBool("Snapped", false);
-    }
-
     IEnumerator KeepGrounded()
     {
         yield return new WaitForSeconds(keepGroundedTime);
