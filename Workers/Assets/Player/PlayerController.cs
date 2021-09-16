@@ -114,9 +114,6 @@ public class PlayerController : MonoBehaviour
         }
 
         if (agent.enabled)
-            HandleNavMeshMovement();
-
-        if ((gameController.snapped || !gameController.startedLevel || gameController.finishedAllTasks) && isGrounded)
         {
             HandleNavMeshMovement();
             return;
