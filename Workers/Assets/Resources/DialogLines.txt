@@ -54,6 +54,66 @@
                     "speakerId": 1
                 }
             ]
+        },
+        {
+            "dialogId": 3,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Morning <b><color=#FF003F>Boss</b></color>!",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "Maybe for <b>you</b>...",
+                    "speakerId": 2
+                },
+                {
+                    "lineId": 3,
+                    "text": "Oh boy. It's going to be one of <i>those</i> days...",
+                    "speakerId": 1
+                }
+            ]
+        },
+        {
+            "dialogId": 4,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Finished for today <b><color=#FF003F>Boss</b></color>!",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "Finally...",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": 5,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "That's it... I can't handle this anymore!<br><b><color=#FF003F>I quit!!</b></color>",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "Took you long enough",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": 6,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "<i>Fantastic</i>... another <b><color=#00BFAB>Worker</color></b>...<br>Go grab some <b><color=#C8AC18>boxes</b></color>, or <i>something</i>.<br>You'll figure it out.",
+                    "speakerId": 2
+                }
+            ]
         }
     ]
 }

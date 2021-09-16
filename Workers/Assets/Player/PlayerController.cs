@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.CompareTag("Box") && !gameController.snapped && !gameController.finishedAllTasks)
+        if (collision.CompareTag("Box") && !gameController.snapped && !gameController.finishedAllTasks && gameController.startedLevel)
         {
             if (box == null && taskManager.hasTaskOfType(Task.TaskType.BOX_COLLECTION))
             {
@@ -199,6 +199,12 @@ public class PlayerController : MonoBehaviour
                 dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
                 break;
             case GameController.SceneType.FACTORY:
+                if (!gameController.startedLevel)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true, taskManager.GenerateTasks);
+                else if (gameController.finishedAllTasks && !gameController.snapped)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(4), true, taskManager.GenerateTasks);
+                else if (!gameController.finishedAllTasks && gameController.snapped)
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(5), true, taskManager.GenerateTasks);
                 break;
             default:
                 if (!gameController.startedLevel)

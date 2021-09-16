@@ -3937,7 +3937,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 7
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3969,10 +3969,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: ea3c6e7fdc86d43448327978d01b7e33, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: ea3c6e7fdc86d43448327978d01b7e33, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: f6691ad22b4310b43be85b18ff3c4643, type: 3}
   m_TileMatrixArray:
@@ -29011,6 +29011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3306936793623761698}
   doorCollider: {fileID: 3306936793440113914}
+  ignoreFinishedAllTasks: 0
 --- !u!1 &3306936794281517590
 GameObject:
   m_ObjectHideFlags: 0

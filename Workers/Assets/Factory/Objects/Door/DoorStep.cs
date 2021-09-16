@@ -34,7 +34,7 @@ public class DoorStep : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (gameController.finishedAllTasks || ignoreFinishedAllTasks)
+            if (gameController.finishedAllTasks || ignoreFinishedAllTasks || !gameController.startedLevel)
                 OpenDoor();
         }
     }
