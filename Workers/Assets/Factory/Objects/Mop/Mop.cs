@@ -3,23 +3,24 @@ using UnityEngine;
 
 public class Mop : MonoBehaviour
 {
-    public float moppingDuration = 2.5f;
     public bool hasMopped = false;
-    private Coroutine moppingCoroutine = null;
+    private System.Action finishedMoppingCallback;
+
+    Animator animator;
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
     public void StartMopping(System.Action finishedMoppingCallback)
     {
-        if (moppingCoroutine == null)
-        {
-            moppingCoroutine = StartCoroutine(Mopping(finishedMoppingCallback));
-        }
+        this.finishedMoppingCallback = finishedMoppingCallback;
+        animator.SetTrigger("mopping");
     }
 
-    IEnumerator Mopping(System.Action finishedMoppingCallback)
+    private void FinishedMopping()
     {
-        yield return new WaitForSeconds(moppingDuration);
         hasMopped = true;
-        moppingCoroutine = null;
         finishedMoppingCallback.Invoke();
     }
 }
