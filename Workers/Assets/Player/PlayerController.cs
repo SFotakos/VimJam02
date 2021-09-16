@@ -193,27 +193,43 @@ public class PlayerController : MonoBehaviour
         {
             case GameController.SceneType.BOXES_TUTORIAL:
                 if (!gameController.startedLevel)
-                    dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true, taskManager.GenerateTasks);
+                    dialogDisplay.ShowDialog(dialogManager.GetDialog(0), true, taskManager.GenerateTasks);
                 break;
             case GameController.SceneType.STRESS_TUTORIAL:
-                dialogDisplay.ShowDialog(dialogManager.GetDialog(2), true);
+                dialogDisplay.ShowDialog(dialogManager.GetDialog(1), true);
                 break;
             case GameController.SceneType.FACTORY:
                 switch (gameController.currentDay)
                 {
                     case GameController.DayEnum.FIRST:
                         if (!gameController.startedLevel)
-                            dialogDisplay.ShowDialog(dialogManager.GetDialog(3), true, taskManager.GenerateTasks);
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(100), true, taskManager.GenerateTasks);
                         else if (gameController.finishedAllTasks && !gameController.snapped)
-                            dialogDisplay.ShowDialog(dialogManager.GetDialog(4), true);
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(101), true);
                         else if (!gameController.finishedAllTasks && gameController.snapped)
-                            dialogDisplay.ShowDialog(dialogManager.GetDialog(5), true);
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(-1), true);
                         break;
                     case GameController.DayEnum.SECOND:
+                        if (!gameController.startedLevel)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(200), true, taskManager.GenerateTasks);
+                        else if (gameController.finishedAllTasks && !gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(201), true);
+                        else if (!gameController.finishedAllTasks && gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(-1), true);
                         break;
                     case GameController.DayEnum.THIRD:
+                        if (!gameController.startedLevel)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(300), true, taskManager.GenerateTasks);
+                        else if (!gameController.finishedAllTasks && gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(-1), true);
                         break;
                     case GameController.DayEnum.FOURTH:
+                        if (!gameController.startedLevel)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(400), true, taskManager.GenerateTasks);
+                        else if (gameController.finishedAllTasks && !gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(401), true);
+                        else if (!gameController.finishedAllTasks && gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(-2), true);
                         break;
                 }
                 break;

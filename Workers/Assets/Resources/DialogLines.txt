@@ -1,11 +1,41 @@
 {
     "dialogs": [
         {
-            "dialogId": 1,
+            "dialogId": -1,
             "lines": [
                 {
                     "lineId": 1,
-                    "text": "Well, you must be the new <b><color=#00BFAB>Worker</color></b> that the crappy <i>Human Resource</i> team hired.<br>I hope you last more than the others <i>idiots</i> they hired before you.\n<page>I'm the <b><color=#FF003F>Boss</b></color> of this site.\n<page>You'll be responsible for organizing this place.<br>Take all the <b><color=#C8AC18>boxes</b></color> and give them to the <b><color=#C8AC18>guy in orange</color></b>...<br>can't remember his name...\n<page>Also be sure to <b><color=#C8AC18>mop</color></b> this place clean.<br>I don't wanna see any mess here.\n<page>You can end your training after you've finished carrying those <b><color=#C8AC18>boxes</color></b>.<br><b>Any questions?</b>",
+                    "text": "That's it... I can't handle this anymore!<br><b><color=#FF003F>I quit!!</b></color>",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "Took you long enough",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": -2,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "I'm sorry <b><color=#72FF4F>Boss</b></color> this job isn't for me...<br><b><color=#FF003F>I'm quitting.</b></color>",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "No problem, it happens.<br>It's a <b>hard</b> job after all...",
+                    "speakerId": 3
+                }
+            ]
+        },
+        {
+            "dialogId": 0,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Well, you must be the new <b><color=#00BFAB>Worker</color></b> that the crappy <i>Human Resource</i> team hired.<br>I hope you last more than the other <i>idiots</i> they hired before you.\n<page>I'm the <b><color=#FF003F>Boss</b></color> of this site.\n<page>You'll be responsible for organizing this place.<br>Take all the <b><color=#C8AC18>boxes</b></color> and give them to the <b><color=#C8AC18>guy in orange</color></b>...<br>can't remember his name...\n<page>Also be sure to <b><color=#C8AC18>mop</color></b> this place clean.<br>I don't wanna see any mess here.\n<page>You can end your training after you've finished carrying those <b><color=#C8AC18>boxes</color></b>.<br><b>Any questions?</b>",
                     "speakerId": 2
                 },
                 {
@@ -21,12 +51,12 @@
             ]
         },
         {
-            "dialogId": 2,
+            "dialogId": 1,
             "lines": [
                 {
                     "lineId": 1,
                     "text": "Hey, you're the new <b><color=#00BFAB>Worker</color></b>!<br>How is it going so far?",
-                    "speakerId": 2
+                    "speakerId": 3
                 },
                 {
                     "lineId": 2,
@@ -36,7 +66,7 @@
                 {
                     "lineId": 3,
                     "text": "This work is <b>hard</b>...<br>A tip for you, pay attention to your <b><color=#FF003F>stress</color></b> level.<br>I've seen a lot of workers <b><color=#C8AC18>on the edge</color></b> in this hellhole.",
-                    "speakerId": 2
+                    "speakerId": 3
                 },
                 {
                     "lineId": 4,
@@ -46,7 +76,7 @@
                 {
                     "lineId": 5,
                     "text": "And try to be safe.<br>There are tons of <b><color=#FF003F>dangerous machines</color></b> over here.<br>It's a stressful place.",
-                    "speakerId": 2
+                    "speakerId": 3
                 },
                 {
                     "lineId": 6,
@@ -56,7 +86,47 @@
             ]
         },
         {
-            "dialogId": 3,
+            "dialogId": 100,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Finished the training <b><color=#FF003F>Boss</b></color>!",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "<i>Good</i>.<br>Go put it into action.",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": 101,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Finished for today <b><color=#FF003F>Boss</b></color>!",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 1,
+                    "text": "Okay...",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": 102,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "<i>Fantastic</i>... another <b><color=#00BFAB>Worker</color></b>...<br>Go grab some <b><color=#C8AC18>boxes</b></color>, or <i>something</i>.<br>You'll figure it out.",
+                    "speakerId": 2
+                }
+            ]
+        },
+        {
+            "dialogId": 200,
             "lines": [
                 {
                     "lineId": 1,
@@ -76,7 +146,7 @@
             ]
         },
         {
-            "dialogId": 4,
+            "dialogId": 201,
             "lines": [
                 {
                     "lineId": 1,
@@ -85,33 +155,58 @@
                 },
                 {
                     "lineId": 2,
-                    "text": "Finally...",
+                    "text": "It was about time...",
                     "speakerId": 2
                 }
             ]
         },
         {
-            "dialogId": 5,
+            "dialogId": 300,
             "lines": [
                 {
                     "lineId": 1,
-                    "text": "That's it... I can't handle this anymore!<br><b><color=#FF003F>I quit!!</b></color>",
+                    "text": "Hey <b><color=#FF003F>Boss</b></color>",
                     "speakerId": 1
                 },
                 {
                     "lineId": 2,
-                    "text": "Took you long enough",
+                    "text": "...",
                     "speakerId": 2
                 }
             ]
         },
         {
-            "dialogId": 6,
+            "dialogId": 400,
             "lines": [
                 {
                     "lineId": 1,
-                    "text": "<i>Fantastic</i>... another <b><color=#00BFAB>Worker</color></b>...<br>Go grab some <b><color=#C8AC18>boxes</b></color>, or <i>something</i>.<br>You'll figure it out.",
-                    "speakerId": 2
+                    "text": "Hey! Good news!<br>I've been promoted!<br>I'm the new <b><color=#72FF4F>Boss</b></color> now!",
+                    "speakerId": 3
+                },
+                {
+                    "lineId": 2,
+                    "text": "Oh, that is <b>awesome</b>!<br>It'll be great to have a change in command.<br><b>Congrats!</b>",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 3,
+                    "text": "I hope I can do better for the <b><color=#00BFAB>Workers</color></b>!<br>If you need anything, let me know.",
+                    "speakerId": 3
+                }
+            ]
+        },
+        {
+            "dialogId": 401,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Finished all my tasks <b><color=#72FF4F>Boss</b></color>!<br>See you <b><color=#C8AC18>tomorrow!</color></b>",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "That was <b>fast</b>!<br><b>Thank you</b> for your work.",
+                    "speakerId": 3
                 }
             ]
         }

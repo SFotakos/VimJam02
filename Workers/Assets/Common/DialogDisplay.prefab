@@ -49,4 +49,5 @@ MonoBehaviour:
   portraitList:
   - {fileID: 21300000, guid: 9eee4e54f059a8a4884adb8965ab1ab7, type: 3}
   - {fileID: 21300000, guid: 6f3a0d417b5734a4ea0f7aa293980cc5, type: 3}
-  typewriterDefaultCharacterRevealTime: 0.045
+  - {fileID: 21300000, guid: 663dbe10ed5b68f48b4ed658f9185300, type: 3}
+  typewriterDefaultCharacterRevealTime: 0.038

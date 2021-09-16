@@ -51,7 +51,10 @@ public class GameController : MonoBehaviour
         _instance = FindObjectOfType<GameController>();
         string sceneName = SceneManager.GetActiveScene().name;
         if (sceneName.ToLower().Contains("tutorial"))
+        {
             isTutorial = true;
+            PlayerPrefs.DeleteAll();
+        }
 
         //LockCursor();
 
