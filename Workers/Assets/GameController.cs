@@ -48,6 +48,11 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        if (PlayerPrefs.GetInt("PlayerSprite", -1) == -1)
+        {
+            PlayerPrefs.SetInt("PlayerSprite", Random.Range(0, 2));
+        }        
+
         _instance = FindObjectOfType<GameController>();
         string sceneName = SceneManager.GetActiveScene().name;
         if (sceneName.ToLower().Contains("tutorial"))
@@ -73,6 +78,7 @@ public class GameController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
     private void UnlockCursor()
     {
         Cursor.visible = true;
@@ -133,6 +139,11 @@ public class GameController : MonoBehaviour
             return (SceneType) 99;
         else 
             return (SceneType) scene.buildIndex;
+    }
+
+    public int GetPlayerSprite()
+    {
+        return PlayerPrefs.GetInt("PlayerSprite");
     }
 
     private void SavePrefs()

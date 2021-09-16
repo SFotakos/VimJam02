@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -55,6 +56,12 @@ public class PlayerController : MonoBehaviour
     [Header("UI Variables")]
     [Space(5)]
     [SerializeField] private Image carriedItemImage;
+         
+    enum PlayerSprite
+    {
+        CoolGlasses,
+        PinkHair
+    }
 
     // Inventory
     private GameObject box = null;
@@ -124,6 +131,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !animator.GetBool("IsJumping"))
             shouldJump = true;
+    }
+
+    private void LateUpdate()
+    {
+        var alternativeSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + ((PlayerSprite) gameController.GetPlayerSprite()).ToString());
+
+        foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+        {
+            string currentSpriteName = renderer.sprite.name;
+            var newSprite = Array.Find(alternativeSprites, item => item.name == currentSpriteName);
+            if (newSprite)
+                renderer.sprite = newSprite;
+        }
     }
 
     private void FixedUpdate()
