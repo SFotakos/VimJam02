@@ -11,6 +11,7 @@ TagManager:
   - OrangeGuy
   - DeathBox
   - Mop
+  - Money
   layers:
   - Default
   - TransparentFX

@@ -170,7 +170,7 @@
                 },
                 {
                     "lineId": 2,
-                    "text": "...",
+                    "text": "<b>Good</b>, you arrived early today...<br>Do me a <i>favor</i> and bring me the <b><color=#C8AC18>money</color></b> that's around the factory at the <b><color=#C8AC18>end of your shift.</color></b>",
                     "speakerId": 2
                 }
             ]

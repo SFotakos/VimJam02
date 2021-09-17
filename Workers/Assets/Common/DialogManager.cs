@@ -47,11 +47,11 @@ public class DialogManager : MonoBehaviour
     }
 
     // Passing no value returns the first not read dialog.
-    public Dialog GetDialog(int id = -1)
+    public Dialog GetDialog(int id)
     {
         foreach (Dialog dialog in dialogs.dialogs)
         {
-            if (id != -1 && dialog.dialogId == id)
+            if (dialog.dialogId == id)
                 return dialog;
         }
         return null;

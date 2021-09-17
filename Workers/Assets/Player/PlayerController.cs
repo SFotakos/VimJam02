@@ -208,6 +208,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else if (collision.CompareTag("Money") && taskManager.hasTaskOfType(Task.TaskType.MONEY_DELIVERY))
+        {
+            taskManager.DoTask(Task.TaskType.MONEY_DELIVERY);
+            Destroy(collision.gameObject);
+        }
         else if (collision.CompareTag("Boss"))
             StartDialog();
         else if (collision.CompareTag("DeathBox"))

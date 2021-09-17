@@ -85,13 +85,13 @@ public class TaskManager : MonoBehaviour
                         CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
                         break;
                     case GameController.DayEnum.SECOND:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
-                        CreateTaskEntry(Task.TaskType.MOPPING, 2);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                        CreateTaskEntry(Task.TaskType.MOPPING, 3);
                         break;
                     case GameController.DayEnum.THIRD:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 6);
-                        CreateTaskEntry(Task.TaskType.MOPPING, 3);
-                        //CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 4);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
+                        CreateTaskEntry(Task.TaskType.MOPPING, 4);
+                        CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 3);
                         break;
                     case GameController.DayEnum.FOURTH:
                         CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
