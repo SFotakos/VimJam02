@@ -1,15 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     private bool isPaused = false;
     private bool canPause = true;
-    public bool snapped = false;
+    private bool _snapped = false;
+    public bool snapped
+    {
+        get => _snapped;
+        set
+        {
+            _snapped = value;
+            NewWorker();
+        }
+    }
     public bool finishedAllTasks = false;
     public bool startedLevel = false;
     public bool isTutorial = false;
     public bool disableStress { get { return (GetSceneType() == SceneType.BOXES_TUTORIAL || snapped || finishedAllTasks || !startedLevel); } }
+
+    public RectTransform crossfade;
+    Animator crossfadeAnimator;
+    Image crossfadeImage;
+    TextMeshProUGUI crossfadeText;
+    public float timeBetweenTransitions = 1.5f;
 
     public enum DayEnum
     {
@@ -46,13 +64,23 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         if (!PlayerPrefs.HasKey("PlayerSprite"))
         {
             PlayerPrefs.SetInt("PlayerSprite", Random.Range(0, 2));
             PlayerPrefs.Save();
         }
+    }
+
+    private void Awake()
+    {
+        crossfadeImage = crossfade.GetComponentInChildren<Image>();
+        crossfadeText = crossfade.GetComponentInChildren<TextMeshProUGUI>();
+        crossfadeAnimator = crossfade.GetComponentInChildren<Animator>();
+
+        string currentDayString = PlayerPrefs.GetString("CurrentDay");
+        currentDay = !string.IsNullOrEmpty(currentDayString) ? (DayEnum)System.Enum.Parse(typeof(DayEnum), currentDayString) : DayEnum.FIRST;
 
         _instance = FindObjectOfType<GameController>();
         string sceneName = SceneManager.GetActiveScene().name;
@@ -60,12 +88,14 @@ public class GameController : MonoBehaviour
         {
             isTutorial = true;
             PlayerPrefs.DeleteAll();
+
+            crossfadeText.text = "TRAINING DAY.";
+        } else if (sceneName.ToLower().Contains("factory"))
+        {
+            crossfadeText.text = currentDay.ToString().ToUpper() + " DAY.";
         }
 
         //LockCursor();
-
-        string currentDayString = PlayerPrefs.GetString("CurrentDay");
-        currentDay = !string.IsNullOrEmpty(currentDayString) ? (DayEnum) System.Enum.Parse(typeof(DayEnum), currentDayString) : DayEnum.FIRST;
     }
 
     public void RestartScene()
@@ -114,32 +144,18 @@ public class GameController : MonoBehaviour
 
     public void NextScene()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        int index = SceneManager.GetActiveScene().buildIndex;
-        if (currentScene.name.ToLower().Contains("tutorial"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        } else if (currentScene.name.ToLower().Contains("factory"))
-        {
-            if (currentDay != DayEnum.FOURTH)
-            {
-                currentDay++;
-                SavePrefs();
-                RestartScene();
-            } else
-            {
-                //SceneManager.LoadScene("CreditsScene");
-            }
-        } 
+        if (!isTutorial)
+            crossfadeAnimator.SetTrigger("out");
+        StartCoroutine(NextSceneAfterAnimation(!isTutorial ? timeBetweenTransitions : 0f));
     }
 
     public SceneType GetSceneType()
     {
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name.Equals("TestScene"))
-            return (SceneType) 99;
-        else 
-            return (SceneType) scene.buildIndex;
+            return (SceneType)99;
+        else
+            return (SceneType)scene.buildIndex;
     }
 
     public int GetPlayerSprite()
@@ -150,5 +166,41 @@ public class GameController : MonoBehaviour
     private void SavePrefs()
     {
         PlayerPrefs.SetString("CurrentDay", currentDay.ToString());
+    }
+
+    IEnumerator NextSceneAfterAnimation(float timeBetweenTransition)
+    {
+        yield return new WaitForSeconds(timeBetweenTransition);
+        Scene currentScene = SceneManager.GetActiveScene();
+        int index = SceneManager.GetActiveScene().buildIndex;
+        if (currentScene.name.ToLower().Contains("tutorial"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else if (currentScene.name.ToLower().Contains("factory"))
+        {
+            if (currentDay != DayEnum.FOURTH)
+            {
+                currentDay++;
+                SavePrefs();
+                RestartScene();
+            }
+            else
+            {
+                //SceneManager.LoadScene("CreditsScene");
+            }
+        }
+    }
+
+    public bool IsNewWorker()
+    {
+        return PlayerPrefs.HasKey("NewWorker");
+    }
+
+    public void NewWorker()
+    {
+        PlayerPrefs.SetString("NewWorker", "true");
+        PlayerPrefs.DeleteKey("PlayerSprite");
+        PlayerPrefs.Save();
     }
 }

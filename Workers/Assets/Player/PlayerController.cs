@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool disableInput = false;
     [HideInInspector] public bool disableMovement = false;
 
+    Sprite[] alternativeSprites;
+
     private void Awake()
     {
         originalGravityScale = playerRigidbody.gravityScale;
@@ -87,6 +89,8 @@ public class PlayerController : MonoBehaviour
         dialogDisplay = DialogDisplay.instance;
         dialogManager = DialogManager.instance;
         agent.SetDestination(entryDestination.position);
+
+        alternativeSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + ((PlayerSprite)gameController.GetPlayerSprite()).ToString());
     }
 
     void Update()
@@ -128,8 +132,6 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        var alternativeSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + ((PlayerSprite)gameController.GetPlayerSprite()).ToString());
-
         foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
         {
             string currentSpriteName = renderer.sprite.name;
@@ -218,7 +220,12 @@ public class PlayerController : MonoBehaviour
         else if (collision.CompareTag("Boss"))
             StartDialog();
         else if (collision.CompareTag("DeathBox"))
+        {
+            if (!gameController.isTutorial)
+                gameController.NewWorker();
+
             gameController.RestartScene();
+        }
     }
 
     private void StartDialog()
@@ -236,8 +243,10 @@ public class PlayerController : MonoBehaviour
                 switch (gameController.currentDay)
                 {
                     case GameController.DayEnum.FIRST:
-                        if (!gameController.startedLevel)
-                            dialogDisplay.ShowDialog(dialogManager.GetDialog(100), true, taskManager.GenerateTasks);
+                        if (!gameController.startedLevel) {
+                            Dialog dialog = gameController.IsNewWorker() ? dialogManager.GetDialog(102) : dialogManager.GetDialog(100);
+                            dialogDisplay.ShowDialog(dialog, true, taskManager.GenerateTasks);
+                        }
                         else if (gameController.finishedAllTasks && !gameController.snapped)
                             dialogDisplay.ShowDialog(dialogManager.GetDialog(101), true);
                         else if (!gameController.finishedAllTasks && gameController.snapped)

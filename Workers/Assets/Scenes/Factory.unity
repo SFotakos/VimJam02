@@ -731,6 +731,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 206473469}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &355237245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8272901397059046351, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818807526739040474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &355617158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6208,6 +6220,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1952029817 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3384830761800057534, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818807526739040474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1958740746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61532,6 +61550,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6097277143512586010, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8412847018157626229, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -61610,6 +61633,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1818807526739040482 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5829892392581893721, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818807526739040474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1818807527028388521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61709,9 +61738,34 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
         type: 3}
+      propertyPath: crossFade
+      value: 
+      objectReference: {fileID: 1952029817}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
+      propertyPath: crossfade
+      value: 
+      objectReference: {fileID: 1952029817}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
       propertyPath: currentDay
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
+      propertyPath: crossfadeText
+      value: 
+      objectReference: {fileID: 355237245}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
+      propertyPath: crossfadeAnimator
+      value: 
+      objectReference: {fileID: 1818807526739040482}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
+      propertyPath: screenTransitionAnimator
+      value: 
+      objectReference: {fileID: 1818807526739040482}
     - target: {fileID: 6248568697975437321, guid: c774d12e6b587c34c874919e8ecfcf68,
         type: 3}
       propertyPath: m_RootOrder
