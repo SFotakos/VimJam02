@@ -301,9 +301,9 @@ public class PlayerController : MonoBehaviour
 
     private void EnableNavMeshMovement(Vector3 destination)
     {
-        playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
-        playerRigidbody.gravityScale = 0f;
         agent.enabled = true;
+        playerRigidbody.gravityScale = 0f;
+        playerRigidbody.velocity = Vector3.zero;     
         agent.SetDestination(destination);
     }
 

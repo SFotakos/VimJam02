@@ -24,7 +24,10 @@ public class BoxUnloadingArea : MonoBehaviour
                 boxesPosition.Add(new BoxPosition(bottomLeftPosition + new Vector2(j * pointSpacing.x, i * pointSpacing.y)));
             }
         }
+    }
 
+    private void Start()
+    {
         GameController gameController = GameController.instance;
         if (gameController.currentDay == GameController.DayEnum.FOURTH)
             transform.Find("OrangeGuy").gameObject.GetComponent<SpriteRenderer>().enabled = false;
