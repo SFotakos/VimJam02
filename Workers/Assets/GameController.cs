@@ -152,10 +152,15 @@ public class GameController : MonoBehaviour
     public SceneType GetSceneType()
     {
         Scene scene = SceneManager.GetActiveScene();
-        if (scene.name.Equals("TestScene"))
-            return (SceneType)99;
-        else
-            return (SceneType)scene.buildIndex;
+        SceneType sceneType = SceneType.FACTORY;
+        if (scene.name.Equals("FirstTutorial"))
+        {
+            sceneType = SceneType.BOXES_TUTORIAL;
+        } else if (scene.name.Equals("SecondTutorial"))
+        {
+            sceneType = SceneType.STRESS_TUTORIAL;
+        }
+        return sceneType;
     }
 
     public int GetPlayerSprite()
@@ -172,7 +177,6 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenTransition);
         Scene currentScene = SceneManager.GetActiveScene();
-        int index = SceneManager.GetActiveScene().buildIndex;
         if (currentScene.name.ToLower().Contains("tutorial"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
