@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
     {
         agent.enabled = true;
         playerRigidbody.gravityScale = 0f;
-        playerRigidbody.velocity = Vector3.zero;     
+        playerRigidbody.velocity = Vector3.zero;
         agent.SetDestination(destination);
     }
 

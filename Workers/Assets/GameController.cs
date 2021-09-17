@@ -48,10 +48,11 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        if (PlayerPrefs.GetInt("PlayerSprite", -1) == -1)
+        if (!PlayerPrefs.HasKey("PlayerSprite"))
         {
             PlayerPrefs.SetInt("PlayerSprite", Random.Range(0, 2));
-        }        
+            PlayerPrefs.Save();
+        }
 
         _instance = FindObjectOfType<GameController>();
         string sceneName = SceneManager.GetActiveScene().name;
