@@ -185,7 +185,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.CompareTag("OrangeGuy"))
         {
-            StartDialog();
+            if (gameController.currentDay == GameController.DayEnum.FOURTH)
+                StartDialog();
+
             if (box != null)
             {
                 carriedItemImage.enabled = false;

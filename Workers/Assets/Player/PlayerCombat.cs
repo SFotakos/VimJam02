@@ -50,12 +50,12 @@ public class PlayerCombat : MonoBehaviour
             increaseStressCoroutine = StartCoroutine(IncreaseStressPerSecond(stressPerSecond));
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Trap") && !gameController.snapped)
+        if (collision.collider.CompareTag("Trap") && !gameController.snapped)
             IncreaseStress();
     }
-
+  
     public void IncreaseStress(float damage = 5, bool respectInvincibility = true, bool visualFeedback = true)
     {
         if (gameController.disableStress)
