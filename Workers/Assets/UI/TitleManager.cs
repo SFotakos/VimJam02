@@ -58,7 +58,7 @@ public class TitleManager : MonoBehaviour
                 Debug.Log("Options");
                 break;
             case ButtonType.CREDITS:
-                Debug.Log("Credits");
+                SceneManager.LoadScene("CreditsScene");
                 break;
             case ButtonType.QUIT:
                 Application.Quit();

@@ -197,7 +197,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                //SceneManager.LoadScene("CreditsScene");
+                SceneManager.LoadScene("CreditsScene");
             }
         }
     }
