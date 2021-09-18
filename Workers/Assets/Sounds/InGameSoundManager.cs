@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class InGameSoundManager : MonoBehaviour
@@ -44,8 +45,39 @@ public class InGameSoundManager : MonoBehaviour
         MOPPING
     }
 
+    int crushingHammerStartCount = 0;
+    int crushingHammerHitCount = 0;
+
     public void PlaySoundEffect(SoundEffectType soundEffectType)
     {
-        oneShotSource.PlayOneShot(Array.Find(soundEffects, item => item.effectType == soundEffectType).audioClip);
-    }   
+        AudioClip clip = Array.Find(soundEffects, item => item.effectType == soundEffectType).audioClip;
+        if (soundEffectType == SoundEffectType.CRUSHING_HAMMER_START)
+        {
+            if (crushingHammerStartCount < 1)
+            {
+                crushingHammerStartCount++;
+                oneShotSource.PlayOneShot(clip);
+                StartCoroutine(SubtractAudioCountAfterDelay(clip.length, soundEffectType));
+            }
+        }
+        else if (soundEffectType == SoundEffectType.CRUSHING_HAMMER_HIT)
+        {
+            if (crushingHammerHitCount < 1)
+            {
+                crushingHammerHitCount++;
+                oneShotSource.PlayOneShot(clip);
+                StartCoroutine(SubtractAudioCountAfterDelay(clip.length, soundEffectType));
+            }
+        }
+        oneShotSource.PlayOneShot(clip);
+    }
+
+    IEnumerator SubtractAudioCountAfterDelay(float delay, SoundEffectType soundEffectType)
+    {
+        yield return new WaitForSeconds(delay);
+        if (soundEffectType == SoundEffectType.CRUSHING_HAMMER_START)
+            crushingHammerStartCount--;
+        else if (soundEffectType == SoundEffectType.CRUSHING_HAMMER_HIT)
+            crushingHammerHitCount--;
+    }
 }

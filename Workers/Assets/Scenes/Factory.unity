@@ -915,6 +915,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrushingHammer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3450906332207985809, guid: 1c6d0c6336de9cd46bcb885e77590696,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3450906332207985814, guid: 1c6d0c6336de9cd46bcb885e77590696,
         type: 3}
       propertyPath: m_RootOrder
@@ -2902,6 +2907,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrushingHammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450906332207985809, guid: 1c6d0c6336de9cd46bcb885e77590696,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3450906332207985814, guid: 1c6d0c6336de9cd46bcb885e77590696,
         type: 3}
