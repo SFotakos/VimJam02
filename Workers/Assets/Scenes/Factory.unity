@@ -4399,7 +4399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: -0.6080333, y: 0, z: -3.4765646}
+  m_StartPoint: {x: -0.63140315, y: 1.6223424e-13, z: -3.0661523}
   m_EndPoint: {x: -0.65786904, y: 0, z: -1.5635073}
   m_Width: 0.2
   m_CostModifier: 1
