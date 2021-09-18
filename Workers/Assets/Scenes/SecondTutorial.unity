@@ -39277,6 +39277,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
         type: 3}
+      propertyPath: pauseUI
+      value: 
+      objectReference: {fileID: 7568464450380734912}
+    - target: {fileID: 6248568697975437320, guid: c774d12e6b587c34c874919e8ecfcf68,
+        type: 3}
       propertyPath: crossFade
       value: 
       objectReference: {fileID: 7568464450380734911}
@@ -39576,6 +39581,12 @@ Animator:
 --- !u!224 &7568464450380734911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3384830761800057534, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7568464450380734902}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7568464450380734912 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6816986701740619793, guid: ffc5c1bcc1d649b4e95211ed6577ecf7,
     type: 3}
   m_PrefabInstance: {fileID: 7568464450380734902}
   m_PrefabAsset: {fileID: 0}

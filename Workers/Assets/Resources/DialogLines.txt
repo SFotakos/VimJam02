@@ -194,7 +194,7 @@
                     "speakerId": 1
                 }
             ]
-        }
+        },
         {
             "dialogId": 400,
             "lines": [

@@ -23,6 +23,8 @@ public class DialogDisplay : MonoBehaviour
     private Dialog currentDialog;
     private System.Action dialogEndedCallback;
 
+    GameController gameController;
+
     private static DialogDisplay _instance = null;
     public static DialogDisplay instance
     {
@@ -41,15 +43,16 @@ public class DialogDisplay : MonoBehaviour
             return _instance;
         }
     }
-
+    
     private void Start()
     {
         dialogManager = DialogManager.instance;
+        gameController = GameController.instance;
     }
 
     private void Update()
     {
-        if (IsDialogBeingShown() && Input.anyKeyDown)
+        if (IsDialogBeingShown() && Input.anyKeyDown && !Input.GetButtonDown("Cancel") && !gameController.isPaused)
             Continue();
     }
 
@@ -59,6 +62,8 @@ public class DialogDisplay : MonoBehaviour
     {
         if (dialog.read)
             return;
+
+        gameController.canPause = false;
 
         this.dialogEndedCallback = dialogEndedCallback;
         currentDialog = dialog;
@@ -104,6 +109,8 @@ public class DialogDisplay : MonoBehaviour
 
     public void HideDialog()
     {
+        gameController.canPause = true;
+
         if (dialogEndedCallback != null)
             dialogEndedCallback.Invoke();
 

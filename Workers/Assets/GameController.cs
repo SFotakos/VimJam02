@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    private bool isPaused = false;
-    private bool canPause = true;
+    public bool isPaused = false;
+    public bool canPause = true;
     private bool _snapped = false;
     public bool snapped
     {
@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     Image crossfadeImage;
     TextMeshProUGUI crossfadeText;
     public float timeBetweenTransitions = 1.5f;
+
+    public RectTransform pauseUI;
 
     public enum DayEnum
     {
@@ -95,7 +97,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        //LockCursor();
+        LockCursor();
     }
 
     public void RestartScene()
@@ -118,15 +120,19 @@ public class GameController : MonoBehaviour
 
     public void PauseGame()
     {
-        Time.timeScale = 0f; ;
-        if (!canPause && !isPaused)
+        if (!isPaused && canPause)
+        {
+            Time.timeScale = 0f;
+            pauseUI.gameObject.SetActive(true);            
+            UnlockCursor();
             isPaused = true;
-        UnlockCursor();
+        }
     }
 
     public void ResumeGame()
     {
         LockCursor();
+        pauseUI.gameObject.SetActive(false);        
         Time.timeScale = 1f;
         isPaused = false;
     }

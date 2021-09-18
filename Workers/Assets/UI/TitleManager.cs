@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
@@ -42,13 +41,14 @@ public class TitleManager : MonoBehaviour
     public void OnClick(int buttonType)
     {
         audioSource.PlayOneShot(clickClip);
-        switch ((ButtonType) buttonType)
+        switch ((ButtonType)buttonType)
         {
             case ButtonType.PLAY:
                 if (!PlayerPrefs.HasKey("FinishedTutorial"))
                 {
                     SceneManager.LoadScene("FirstTutorial");
-                } else
+                }
+                else
                 {
                     SceneManager.LoadScene("Factory");
                 }
@@ -70,10 +70,5 @@ public class TitleManager : MonoBehaviour
                 PlayerPrefs.Save();
                 break;
         }
-    }
-
-   public void OnHover()
-   {
-        audioSource.PlayOneShot(hoverClip);
     }
 }

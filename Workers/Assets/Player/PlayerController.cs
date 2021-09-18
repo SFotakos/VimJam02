@@ -96,7 +96,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Cancel"))
-            gameController.RestartScene();
+            if (gameController.isPaused)
+                gameController.ResumeGame();
+            else
+                gameController.PauseGame();
 
         if (agent.enabled)
             if (!agent.pathPending)
