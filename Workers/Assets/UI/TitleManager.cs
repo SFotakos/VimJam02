@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
@@ -8,7 +10,8 @@ public class TitleManager : MonoBehaviour
         PLAY,
         OPTIONS,
         CREDITS,
-        QUIT
+        QUIT,
+        CLEAR_SAVE
     }
 
     private AudioSource audioSource;
@@ -19,9 +22,21 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private AudioClip clickClip;
 
+    [Header("Play variables")]
+    [Space(5)]
+    [SerializeField]
+    private RectTransform clearSaveBtn;
+    [SerializeField]
+    private TextMeshProUGUI playText;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (PlayerPrefs.HasKey("FinishedTutorial"))
+        {
+            playText.text = "Continue";
+            clearSaveBtn.gameObject.SetActive(true);
+        } 
     }
 
     public void OnClick(int buttonType)
@@ -30,7 +45,13 @@ public class TitleManager : MonoBehaviour
         switch ((ButtonType) buttonType)
         {
             case ButtonType.PLAY:
-                SceneManager.LoadScene("FirstTutorial");
+                if (!PlayerPrefs.HasKey("FinishedTutorial"))
+                {
+                    SceneManager.LoadScene("FirstTutorial");
+                } else
+                {
+                    SceneManager.LoadScene("Factory");
+                }
                 //SceneManager.LoadScene("Factory"));; //If played the tutorial
                 break;
             case ButtonType.OPTIONS:
@@ -41,6 +62,12 @@ public class TitleManager : MonoBehaviour
                 break;
             case ButtonType.QUIT:
                 Application.Quit();
+                break;
+            case ButtonType.CLEAR_SAVE:
+                playText.text = "Play";
+                clearSaveBtn.gameObject.SetActive(false);
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
                 break;
         }
     }

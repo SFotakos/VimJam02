@@ -84,15 +84,15 @@ public class GameController : MonoBehaviour
 
         _instance = FindObjectOfType<GameController>();
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName.ToLower().Contains("tutorial"))
+        if (GetSceneType() == SceneType.BOXES_TUTORIAL || GetSceneType() == SceneType.STRESS_TUTORIAL)
         {
             isTutorial = true;
-            PlayerPrefs.DeleteAll();
-
-            crossfadeText.text = "TRAINING DAY.";
-        } else if (sceneName.ToLower().Contains("factory"))
+            crossfadeText.text = "FIRST DAY<br>TRAINING";
+        } else if (GetSceneType() == SceneType.FACTORY)
         {
-            crossfadeText.text = currentDay.ToString().ToUpper() + " DAY.";
+            crossfadeText.text = currentDay.ToString().ToUpper() + " DAY";
+            PlayerPrefs.SetString("FinishedTutorial", "true");
+            PlayerPrefs.Save();
         }
 
         //LockCursor();
@@ -205,6 +205,7 @@ public class GameController : MonoBehaviour
     {
         PlayerPrefs.SetString("NewWorker", "true");
         PlayerPrefs.DeleteKey("PlayerSprite");
+        PlayerPrefs.DeleteKey("CurrentDay");
         PlayerPrefs.Save();
     }
 }
