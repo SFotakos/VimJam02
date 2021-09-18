@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class CreditsManager : MonoBehaviour
 {
-
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
     public void OnLinkClicked(TextMeshProUGUI textMeshPro)
     {
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(textMeshPro, Input.mousePosition, null);

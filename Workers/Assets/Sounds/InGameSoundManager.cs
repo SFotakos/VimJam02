@@ -21,7 +21,6 @@ public class InGameSoundManager : MonoBehaviour
     [Header("Audio Sources")]
     [Space(5)]
     [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource ambientSource;
     [SerializeField] AudioSource oneShotSource;
 
     [Header("Audio Clips")]
