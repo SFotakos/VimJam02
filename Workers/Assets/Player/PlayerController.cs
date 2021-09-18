@@ -263,6 +263,8 @@ public class PlayerController : MonoBehaviour
                     case GameController.DayEnum.THIRD:
                         if (!gameController.startedLevel)
                             dialogDisplay.ShowDialog(dialogManager.GetDialog(300), true, taskManager.GenerateTasks);
+                        else if (gameController.finishedAllTasks && !gameController.snapped)
+                            dialogDisplay.ShowDialog(dialogManager.GetDialog(301), true);
                         else if (!gameController.finishedAllTasks && gameController.snapped)
                             dialogDisplay.ShowDialog(dialogManager.GetDialog(-1), true);
                         break;

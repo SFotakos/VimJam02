@@ -176,6 +176,26 @@
             ]
         },
         {
+            "dialogId": 301,
+            "lines": [
+                {
+                    "lineId": 1,
+                    "text": "Here you go, the <b><color=#C8AC18>money</b> as you asked...",
+                    "speakerId": 1
+                },
+                {
+                    "lineId": 2,
+                    "text": "<b>Great</b>!<br>Now... let's forget about this.",
+                    "speakerId": 2
+                },
+                {
+                    "lineId": 3,
+                    "text": "...",
+                    "speakerId": 1
+                }
+            ]
+        }
+        {
             "dialogId": 400,
             "lines": [
                 {
