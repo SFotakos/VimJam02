@@ -10,14 +10,18 @@ public class DoorStep : MonoBehaviour
     [SerializeField]
     private Collider2D doorCollider;
     public bool ignoreFinishedAllTasks = false;
+
+    InGameSoundManager soundManager;
   
     private void Start()
     {
         gameController = GameController.instance;
+        soundManager = InGameSoundManager.instance;
     }
 
     public void OpenDoor()
     {
+        soundManager.PlaySoundEffect(InGameSoundManager.SoundEffectType.DOOR);
         animator.SetBool("openDoor", true);
         animator.SetBool("closeDoor", false);
         doorCollider.enabled = false;

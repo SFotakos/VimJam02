@@ -233,3 +233,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3306936793574602435}
   doorCollider: {fileID: 3306936793489289499}
+  ignoreFinishedAllTasks: 1

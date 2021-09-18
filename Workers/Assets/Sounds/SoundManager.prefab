@@ -438,10 +438,10 @@ MonoBehaviour:
   - effectType: 2
     audioClip: {fileID: 8300000, guid: ab19dca774d42f745b576191d6029c8d, type: 3}
   - effectType: 3
-    audioClip: {fileID: 8300000, guid: ab19dca774d42f745b576191d6029c8d, type: 3}
+    audioClip: {fileID: 8300000, guid: df55b389453e20149a9eaa012ae128ae, type: 3}
   - effectType: 4
-    audioClip: {fileID: 8300000, guid: 3889b7a9a9cf2c441bbf63824257d324, type: 3}
+    audioClip: {fileID: 8300000, guid: 184522e8bd605a34b9043ed9dcee5904, type: 3}
   - effectType: 5
-    audioClip: {fileID: 8300000, guid: 42d2f66014d697442af17d9dc9e470d8, type: 3}
+    audioClip: {fileID: 8300000, guid: 1712ce223ffed0345b17c3d0be9fa364, type: 3}
   - effectType: 6
     audioClip: {fileID: 8300000, guid: ab19dca774d42f745b576191d6029c8d, type: 3}
