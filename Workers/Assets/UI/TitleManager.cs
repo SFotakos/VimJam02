@@ -71,4 +71,9 @@ public class TitleManager : MonoBehaviour
                 break;
         }
     }
+
+    public void OnHover()
+    {
+        audioSource.PlayOneShot(hoverClip);
+    }
 }
