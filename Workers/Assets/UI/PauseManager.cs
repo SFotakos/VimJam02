@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class PauseManager : MonoBehaviour
                 gameController.ResumeGame();
                 break;
             case ButtonType.OPTIONS:
+                gameController.canResume = false;
+                SceneManager.LoadScene("OptionsScene", LoadSceneMode.Additive);
                 break;
             case ButtonType.MENU:
                 gameController.MainMenu();

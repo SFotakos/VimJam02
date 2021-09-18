@@ -52,10 +52,9 @@ public class TitleManager : MonoBehaviour
                 {
                     SceneManager.LoadScene("Factory");
                 }
-                //SceneManager.LoadScene("Factory"));; //If played the tutorial
                 break;
             case ButtonType.OPTIONS:
-                Debug.Log("Options");
+                SceneManager.LoadScene("OptionsScene", LoadSceneMode.Additive);
                 break;
             case ButtonType.CREDITS:
                 SceneManager.LoadScene("CreditsScene");

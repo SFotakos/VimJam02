@@ -108,6 +108,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!222 &7534362087175382418
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429881795845890296}
+  m_CullTransparentMesh: 0
 --- !u!114 &1471834673545634624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,14 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverClip: {fileID: 8300000, guid: d2a94ed883e9d284c8b348a0ea296ae7, type: 3}
   clickClip: {fileID: 8300000, guid: f4c688478c5256042a6a701b80b1289d, type: 3}
---- !u!222 &7534362087175382418
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429881795845890296}
-  m_CullTransparentMesh: 0
 --- !u!114 &2935907989785375123
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public bool isPaused = false;
     public bool canPause = true;
+    public bool canResume = true;
     private bool _snapped = false;
     public bool snapped
     {
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("PlayerSprite", Random.Range(0, 2));
             PlayerPrefs.Save();
         }
+        SceneManager.sceneUnloaded += SceneUnloaded;
     }
 
     private void Awake()
@@ -131,10 +133,13 @@ public class GameController : MonoBehaviour
 
     public void ResumeGame()
     {
-        LockCursor();
-        pauseUI.gameObject.SetActive(false);        
-        Time.timeScale = 1f;
-        isPaused = false;
+        if (isPaused && canResume)
+        {
+            LockCursor();
+            pauseUI.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
     }
 
     public void MainMenu()
@@ -214,4 +219,12 @@ public class GameController : MonoBehaviour
         PlayerPrefs.DeleteKey("CurrentDay");
         PlayerPrefs.Save();
     }
+
+    void SceneUnloaded(Scene scene)
+    {
+        if (scene.name.Equals("OptionsScene"))
+        {
+            canResume = true;
+        }
+    }    
 }
