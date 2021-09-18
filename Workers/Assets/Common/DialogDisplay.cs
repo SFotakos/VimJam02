@@ -24,6 +24,7 @@ public class DialogDisplay : MonoBehaviour
     private System.Action dialogEndedCallback;
 
     GameController gameController;
+    InGameSoundManager soundManager;
 
     private static DialogDisplay _instance = null;
     public static DialogDisplay instance
@@ -48,6 +49,7 @@ public class DialogDisplay : MonoBehaviour
     {
         dialogManager = DialogManager.instance;
         gameController = GameController.instance;
+        soundManager = InGameSoundManager.instance;
     }
 
     private void Update()
@@ -173,6 +175,7 @@ public class DialogDisplay : MonoBehaviour
         for (int visibleCount = currentPageFirstCharacter; visibleCount <= currentPageLastCharacter + 1; visibleCount++)
         {
             yield return new WaitForSecondsRealtime(typewriterDefaultCharacterRevealTime);
+            soundManager.PlaySoundEffect(InGameSoundManager.SoundEffectType.TALK);
             dialogText.maxVisibleCharacters = visibleCount;
         }
 

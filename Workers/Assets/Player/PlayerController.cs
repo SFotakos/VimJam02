@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerCombat playerCombat;
-    private GameController gameController;
+    GameController gameController;
 
     [Header("Movement Variables")]
     [Space(5)]
