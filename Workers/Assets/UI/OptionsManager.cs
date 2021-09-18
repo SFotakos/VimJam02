@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OptionsManager : MonoBehaviour
@@ -16,6 +14,7 @@ public class OptionsManager : MonoBehaviour
     private void Start()
     {
         audioSource = FindObjectOfType<AudioSource>();
+        SceneManager.sceneUnloaded += SceneUnloaded;
     }
 
     public void OnBackClicked()
@@ -27,5 +26,13 @@ public class OptionsManager : MonoBehaviour
     public void OnHover()
     {
         audioSource.PlayOneShot(hoverClip);
+    }
+
+    public void SceneUnloaded(Scene scene)
+    {
+        if (scene.name.Equals("OptionsScreen"))
+        {
+            PlayerPrefs.Save();
+        }
     }
 }
