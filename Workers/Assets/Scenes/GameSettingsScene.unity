@@ -2337,7 +2337,7 @@ PrefabInstance:
     - target: {fileID: 1132932332988661259, guid: af260e894ab74804dbfb8234efdaebe7,
         type: 3}
       propertyPath: m_Name
-      value: DyingQuitting
+      value: PermaDeath
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af260e894ab74804dbfb8234efdaebe7, type: 3}

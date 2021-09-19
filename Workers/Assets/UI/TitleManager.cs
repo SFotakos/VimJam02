@@ -85,7 +85,7 @@ public class TitleManager : MonoBehaviour
 
     private bool HasStartedGame()
     {
-        return PlayerPrefs.HasKey("PlayerSprite") || PlayerPrefs.HasKey("DyingQuitting") 
+        return PlayerPrefs.HasKey("PlayerSprite") || PlayerPrefs.HasKey("PermaDeath") 
             || PlayerPrefs.HasKey("IncreasedTasksAmount") || PlayerPrefs.HasKey("RandomizedTasksLocation");
     }
 }
