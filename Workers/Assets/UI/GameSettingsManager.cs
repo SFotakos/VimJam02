@@ -19,7 +19,10 @@ public class GameSettingsManager : MonoBehaviour
 
     [SerializeField]
     Color grayedOutColor;
-    
+
+    [SerializeField]
+    Toggle[] difficultySettings;
+
     private void Start()
     {
         audioSource = FindObjectOfType<AudioSource>();
@@ -42,6 +45,10 @@ public class GameSettingsManager : MonoBehaviour
 
     public void OnPlayClicked()
     {
+        foreach (Toggle toggle in difficultySettings)
+        {
+            PlayerPrefs.SetString(toggle.name, toggle.isOn.ToString());
+        }
         audioSource.PlayOneShot(clickClip);
         SceneManager.LoadScene("FirstTutorial");
         PlayerPrefs.Save();

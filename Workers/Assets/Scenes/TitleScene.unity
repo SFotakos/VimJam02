@@ -332,7 +332,7 @@ PrefabInstance:
     - target: {fileID: 2322318136512363595, guid: 14cb6e0c186ba9f49a246fe3394af904,
         type: 3}
       propertyPath: m_Name
-      value: FullscreenHandler (1)
+      value: FullscreenHandler
       objectReference: {fileID: 0}
     - target: {fileID: 4922006018500782986, guid: 14cb6e0c186ba9f49a246fe3394af904,
         type: 3}
