@@ -214,10 +214,13 @@ public class GameController : MonoBehaviour
 
     public void NewWorker()
     {
-        PlayerPrefs.SetString("NewWorker", "true");
-        PlayerPrefs.DeleteKey("PlayerSprite");
-        PlayerPrefs.DeleteKey("CurrentDay");
-        PlayerPrefs.Save();
+        if (bool.Parse(PlayerPrefs.GetString("PermaDeath")))
+        {
+            PlayerPrefs.SetString("NewWorker", "true");
+            PlayerPrefs.DeleteKey("PlayerSprite");
+            PlayerPrefs.DeleteKey("CurrentDay");
+            PlayerPrefs.Save();
+        }
     }
 
     void SceneUnloaded(Scene scene)

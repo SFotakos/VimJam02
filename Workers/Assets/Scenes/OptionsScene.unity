@@ -373,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 2322318136512363595, guid: 14cb6e0c186ba9f49a246fe3394af904,
         type: 3}
       propertyPath: m_Name
-      value: FullscreenHandler (1)
+      value: FullscreenHandler
       objectReference: {fileID: 0}
     - target: {fileID: 4922006018500782986, guid: 14cb6e0c186ba9f49a246fe3394af904,
         type: 3}
@@ -515,7 +515,8 @@ AudioSource:
   m_GameObject: {fileID: 7117768903398319158}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ca8b5f5092fd80345815647354977b4a,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

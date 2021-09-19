@@ -31,11 +31,13 @@ public class TaskManager : MonoBehaviour
     private GameObject taskEntry;
 
     private List<Task> tasks = new List<Task>();
+    private bool increasedTaskAmount = false;
 
     private void Start()
     {
         gameController = GameController.instance;
         gameController.finishedAllTasks = false;
+        increasedTaskAmount = bool.Parse(PlayerPrefs.GetString("IncreasedTasksAmount"));
 
         if (gameController.GetSceneType() == GameController.SceneType.STRESS_TUTORIAL)
         {
@@ -82,19 +84,19 @@ public class TaskManager : MonoBehaviour
                 switch (gameController.currentDay)
                 {
                     case GameController.DayEnum.FIRST:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 3);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION);
                         break;
                     case GameController.DayEnum.SECOND:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
-                        CreateTaskEntry(Task.TaskType.MOPPING, 3);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION);
+                        CreateTaskEntry(Task.TaskType.MOPPING);
                         break;
                     case GameController.DayEnum.THIRD:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 5);
-                        CreateTaskEntry(Task.TaskType.MOPPING, 4);
-                        CreateTaskEntry(Task.TaskType.MONEY_DELIVERY, 3);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION);
+                        CreateTaskEntry(Task.TaskType.MOPPING);
+                        CreateTaskEntry(Task.TaskType.MONEY_DELIVERY);
                         break;
                     case GameController.DayEnum.FOURTH:
-                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION, 4);
+                        CreateTaskEntry(Task.TaskType.BOX_COLLECTION);
                         break;
                 }
                 break;
@@ -103,6 +105,57 @@ public class TaskManager : MonoBehaviour
                 break;
         }        
         tasksUI.gameObject.SetActive(tasks.Count != 0);
+    }
+
+    public int GetTaskAmount(Task.TaskType taskType)
+    {
+        int taskAmount = 0;
+        switch (taskType)
+        {
+            case Task.TaskType.BOX_COLLECTION:
+                switch (gameController.currentDay)
+                {
+                    case GameController.DayEnum.FIRST:
+                        taskAmount = 3;
+                        break;
+                    case GameController.DayEnum.SECOND:
+                        taskAmount = 4;
+                        break;
+                    case GameController.DayEnum.THIRD:
+                        taskAmount = 5;
+                        break;
+                    case GameController.DayEnum.FOURTH:
+                        taskAmount = 4;
+                        break;
+                }
+                break;
+            case Task.TaskType.MOPPING:
+                switch (gameController.currentDay)
+                {
+                    case GameController.DayEnum.SECOND:
+                        taskAmount = 2;
+                        break;
+                    case GameController.DayEnum.THIRD:
+                        taskAmount = 3;
+                        break;
+                }
+                break;
+            case Task.TaskType.MONEY_DELIVERY:
+                taskAmount = 3;
+                break;
+        }
+        if ((taskType == Task.TaskType.BOX_COLLECTION || taskType == Task.TaskType.MOPPING) && increasedTaskAmount)
+            taskAmount++;
+
+        return taskAmount;
+    }
+
+    private void CreateTaskEntry(Task.TaskType taskType)
+    {
+        GameObject _taskEntry = Instantiate(taskEntry, tasksUI);
+        Task task = _taskEntry.GetComponent<Task>();
+        task.InitializeTask(taskType, GetTaskAmount(taskType));
+        tasks.Add(task);
     }
 
     private void CreateTaskEntry(Task.TaskType taskType, int requiredAmount)

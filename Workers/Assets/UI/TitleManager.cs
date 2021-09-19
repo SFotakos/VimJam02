@@ -31,7 +31,7 @@ public class TitleManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (PlayerPrefs.HasKey("FinishedTutorial"))
+        if (HasStartedGame())
         {
             playText.text = "Continue";
             clearSaveBtn.gameObject.SetActive(true);
@@ -44,13 +44,20 @@ public class TitleManager : MonoBehaviour
         switch ((ButtonType)buttonType)
         {
             case ButtonType.PLAY:
-                if (!PlayerPrefs.HasKey("FinishedTutorial"))
+                if (!HasStartedGame())
                 {
-                    SceneManager.LoadScene("FirstTutorial");
+                    SceneManager.LoadScene("GameSettingsScene", LoadSceneMode.Additive);
                 }
                 else
                 {
-                    SceneManager.LoadScene("Factory");
+                    if (!PlayerPrefs.HasKey("FinishedTutorial"))
+                    {
+                        SceneManager.LoadScene("FirstTutorial");
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene("Factory");
+                    }
                 }
                 break;
             case ButtonType.OPTIONS:
@@ -74,5 +81,11 @@ public class TitleManager : MonoBehaviour
     public void OnHover()
     {
         audioSource.PlayOneShot(hoverClip);
+    }
+
+    private bool HasStartedGame()
+    {
+        return PlayerPrefs.HasKey("PlayerSprite") || PlayerPrefs.HasKey("PermaDeath") 
+            || PlayerPrefs.HasKey("IncreasedTasksAmount") || PlayerPrefs.HasKey("RandomizedTasksLocation");
     }
 }
