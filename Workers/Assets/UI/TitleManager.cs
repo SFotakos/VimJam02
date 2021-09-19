@@ -31,11 +31,8 @@ public class TitleManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (HasStartedGame())
-        {
-            playText.text = "Continue";
-            clearSaveBtn.gameObject.SetActive(true);
-        } 
+        SetupPlayButton();
+        SceneManager.sceneUnloaded += SceneUnloaded;
     }
 
     public void OnClick(int buttonType)
@@ -89,9 +86,28 @@ public class TitleManager : MonoBehaviour
         Screen.fullScreen = !Screen.fullScreen;
     }
 
+    private void SetupPlayButton()
+    {
+        if (HasStartedGame())
+        {
+            if (playText != null)
+                playText.text = "Continue";
+            if (clearSaveBtn != null)
+                clearSaveBtn.gameObject.SetActive(true);
+        }
+    }
+
     private bool HasStartedGame()
     {
         return PlayerPrefs.HasKey("PlayerSprite") || PlayerPrefs.HasKey("PermaDeath") 
             || PlayerPrefs.HasKey("IncreasedTasksAmount") || PlayerPrefs.HasKey("RandomizedTasksLocation");
+    }
+
+    private void SceneUnloaded(Scene scene)
+    {
+        if (scene.name.Equals("GameSettingsScene"))
+        {
+            SetupPlayButton();
+        }
     }
 }

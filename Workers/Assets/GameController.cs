@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        LockCursor();
+        //LockCursor();
     }
 
     public void RestartScene()
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour
         {
             Time.timeScale = 0f;
             pauseUI.gameObject.SetActive(true);            
-            UnlockCursor();
+            //UnlockCursor();
             isPaused = true;
         }
     }
@@ -135,7 +135,7 @@ public class GameController : MonoBehaviour
     {
         if (isPaused && canResume)
         {
-            LockCursor();
+            //LockCursor();
             pauseUI.gameObject.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;

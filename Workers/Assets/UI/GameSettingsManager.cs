@@ -23,15 +23,16 @@ public class GameSettingsManager : MonoBehaviour
     [SerializeField]
     Toggle[] difficultySettings;
 
+    string selectedSprite = "CoolGlasses";
+
     private void Start()
     {
         audioSource = FindObjectOfType<AudioSource>();
-        PlayerPrefs.SetInt("PlayerSprite", 0);
     }
 
     public void OnSelectedSprite(string spriteName)
     {
-        PlayerPrefs.SetInt("PlayerSprite", spriteName.Equals("CoolGlasses") ? 0 : 1);
+        selectedSprite = spriteName;
         foreach (Image image in playerImages)
         {
             if (image.name.Equals(spriteName)) {
@@ -57,6 +58,8 @@ public class GameSettingsManager : MonoBehaviour
         {
             SceneManager.LoadScene("FirstTutorial");
         }
+        PlayerPrefs.SetInt("PlayerSprite", selectedSprite.Equals("CoolGlasses") ? 0 : 1);
+
         PlayerPrefs.Save();
     }
    
