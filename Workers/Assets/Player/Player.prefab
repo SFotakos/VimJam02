@@ -5025,7 +5025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 56230989023841181}
   snappedParticles: {fileID: 1239720313}
-  maxStress: 80
+  maxStress: 90
   currentStress: 0
   stressPerSecond: 0.75
   stressMeter: {fileID: 0}
@@ -5045,6 +5045,8 @@ MonoBehaviour:
   tasksUI: {fileID: 0}
   taskEntry: {fileID: 3559002982460550421, guid: 996980200e5a2994ba55621016f6fcf1,
     type: 3}
+  boxesParent: {fileID: 0}
+  mopsParent: {fileID: 0}
 --- !u!195 &1954241428
 NavMeshAgent:
   m_ObjectHideFlags: 0

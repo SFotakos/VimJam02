@@ -155,7 +155,7 @@ public class TaskManager : MonoBehaviour
                 taskAmount = 3;
                 break;
         }
-        if ((taskType == Task.TaskType.BOX_COLLECTION || taskType == Task.TaskType.MOPPING) && increasedTaskAmount)
+        if ((taskType == Task.TaskType.BOX_COLLECTION || taskType == Task.TaskType.MOPPING) && increasedTaskAmount && taskAmount > 0)
             taskAmount++;
 
         return taskAmount;
@@ -191,7 +191,7 @@ public class TaskManager : MonoBehaviour
     {
         GameObject[] boxes = GameObject.FindGameObjectsWithTag("Box");
         GameObject[] mops = GameObject.FindGameObjectsWithTag("Mop");
-        int boxHideAmount = boxes.Length - GetTaskAmount(Task.TaskType.BOX_COLLECTION) -1;
+        int boxHideAmount = boxes.Length - GetTaskAmount(Task.TaskType.BOX_COLLECTION);
         int mopHideAmount = mops.Length - GetTaskAmount(Task.TaskType.MOPPING);
         
         ShuffleArray<GameObject>(boxes);
