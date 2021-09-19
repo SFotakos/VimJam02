@@ -307,7 +307,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 334217073}
-  - component: {fileID: 334217074}
   - component: {fileID: 334217075}
   m_Layer: 0
   m_Name: TutorialManager
@@ -335,19 +334,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &334217074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334217072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20da27bdfdd15d44d8dd5f9fe45c175c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialUI: {fileID: 0}
 --- !u!61 &334217075
 BoxCollider2D:
   m_ObjectHideFlags: 0
