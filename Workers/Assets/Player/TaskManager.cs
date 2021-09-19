@@ -191,27 +191,27 @@ public class TaskManager : MonoBehaviour
     {
         GameObject[] boxes = GameObject.FindGameObjectsWithTag("Box");
         GameObject[] mops = GameObject.FindGameObjectsWithTag("Mop");
-        int boxAmount = boxes.Length - GetTaskAmount(Task.TaskType.BOX_COLLECTION);
-        int mopAmount = mops.Length - GetTaskAmount(Task.TaskType.MOPPING);
+        int boxHideAmount = boxes.Length - GetTaskAmount(Task.TaskType.BOX_COLLECTION) -1;
+        int mopHideAmount = mops.Length - GetTaskAmount(Task.TaskType.MOPPING);
         
         ShuffleArray<GameObject>(boxes);
         ShuffleArray<GameObject>(mops);
         
         foreach (GameObject box in boxes)
         {
-            if (boxAmount > 0)
+            if (boxHideAmount > 0)
             {
                 box.SetActive(false);
-                boxAmount--;
+                boxHideAmount--;
             }
         }
 
         foreach (GameObject mop in mops)
         {
-            if (mopAmount > 0)
+            if (mopHideAmount > 0)
             {
                 mop.SetActive(false);
-                mopAmount--;
+                mopHideAmount--;
             }
         }
     }

@@ -50,7 +50,13 @@ public class GameSettingsManager : MonoBehaviour
             PlayerPrefs.SetString(toggle.name, toggle.isOn.ToString());
         }
         audioSource.PlayOneShot(clickClip);
-        SceneManager.LoadScene("FirstTutorial");
+        if (((Toggle) GameObject.Find("SkipTutorial").GetComponent<Toggle>()).isOn)
+        {
+            SceneManager.LoadScene("Factory");
+        } else
+        {
+            SceneManager.LoadScene("FirstTutorial");
+        }
         PlayerPrefs.Save();
     }
    
