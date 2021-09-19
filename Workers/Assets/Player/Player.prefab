@@ -4998,7 +4998,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   groundCheck: {fileID: 6428008355064487015}
-  groundCheckRadius: 0.045
+  groundCheckRadius: 0.03
   whatIsLadder:
     serializedVersion: 2
     m_Bits: 4096

@@ -1,8 +1,5 @@
-﻿using System;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Windows;
 
 [CreateAssetMenu]
 public class ExampleCustomRuleTile : RuleTile<ExampleCustomRuleTile.Neighbor> 

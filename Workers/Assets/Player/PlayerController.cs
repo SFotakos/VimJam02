@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     [SerializeField] private LayerMask whatIsGround;                                // A mask determining what is ground to the character.
     [SerializeField] private Transform groundCheck;                                 // A position marking where to check if the player is grounded.
-    [Range(.03f, .15f)] [SerializeField] private float groundCheckRadius = .035f;   // Radius of the overlap circle to determine if grounded.
+    [Range(.03f, .15f)] [SerializeField] private float groundCheckRadius = .028f;   // Radius of the overlap circle to determine if grounded.
     private bool isGrounded = true;                                                 // Whether or not the player is grounded.
     private bool disableGroundCheck = false;
     private Coroutine keepGroundedCoroutine = null;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Pause")) 
             if (gameController.isPaused)
                 gameController.ResumeGame();
             else
@@ -296,6 +296,12 @@ public class PlayerController : MonoBehaviour
     // Horizontal and vertical movements are multiplied by Time.fixedDeltaTime
     private void Move(float horizontalMovement, float verticalMovement, bool jump)
     {
+        if (jump && keepGroundedCoroutine != null)
+        {
+            StopCoroutine(keepGroundedCoroutine);
+            keepGroundedCoroutine = null;
+        }
+
         bool climbing = ladderHitInfo.collider != null && verticalMovement > 0;
         playerRigidbody.gravityScale = climbing ? 0 : originalGravityScale;
         float _verticalMovement = climbing ? verticalMovement * climbingSpeed : playerRigidbody.velocity.y;
