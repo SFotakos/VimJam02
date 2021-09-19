@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.CompareTag("OrangeGuy"))
         {
-            if (gameController.currentDay == GameController.DayEnum.FOURTH)
+            if (gameController.currentDay == GameController.DayEnum.FOURTH || gameController.isTutorial)
                 StartDialog();
 
             if (box != null)

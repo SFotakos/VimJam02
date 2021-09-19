@@ -1,9 +1,13 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
 public class CreditsManager : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void OpenURLInExternalWindow(string url);
+
     private void Start()
     {
         Cursor.visible = true;
@@ -15,7 +19,13 @@ public class CreditsManager : MonoBehaviour
         if (linkIndex != -1)
         { 
             TMP_LinkInfo linkInfo = textMeshPro.textInfo.linkInfo[linkIndex];
-            Application.OpenURL(linkInfo.GetLinkID());
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                OpenURLInExternalWindow(linkInfo.GetLinkID());
+            } else if (Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                Application.OpenURL(linkInfo.GetLinkID());
+            }
         }
     }
 

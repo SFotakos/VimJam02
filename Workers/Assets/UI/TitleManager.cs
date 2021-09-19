@@ -67,6 +67,7 @@ public class TitleManager : MonoBehaviour
                 SceneManager.LoadScene("CreditsScene");
                 break;
             case ButtonType.QUIT:
+                Screen.fullScreen = false;
                 Application.Quit();
                 break;
             case ButtonType.CLEAR_SAVE:
@@ -81,6 +82,11 @@ public class TitleManager : MonoBehaviour
     public void OnHover()
     {
         audioSource.PlayOneShot(hoverClip);
+    }
+
+    public void OnFullScreenClicked()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
     }
 
     private bool HasStartedGame()
