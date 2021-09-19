@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Increase <color=#C8AC18>Difficulty</color>
+  m_text: Make the game <color=#FF003F>harder</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a47bbc4da4e767439b242dd1381638c, type: 2}
   m_sharedMaterial: {fileID: -3753554383248538144, guid: 6a47bbc4da4e767439b242dd1381638c,
@@ -2038,7 +2038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 72
+  m_MinHeight: 108
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
