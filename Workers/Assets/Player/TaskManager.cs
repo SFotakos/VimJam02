@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TaskManager : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     private GameObject taskEntry;
 
+    [SerializeField]
+    private GameObject boxesParent;
+    [SerializeField]
+    private GameObject mopsParent;
+
     private List<Task> tasks = new List<Task>();
     private bool increasedTaskAmount = false;
 
@@ -42,6 +48,11 @@ public class TaskManager : MonoBehaviour
         if (gameController.GetSceneType() == GameController.SceneType.STRESS_TUTORIAL)
         {
             GenerateTasks();
+        }
+
+        if (gameController.GetSceneType() == GameController.SceneType.FACTORY && bool.Parse(PlayerPrefs.GetString("RandomizedTasksLocation")))
+        {
+            HandleRandomization();
         }
     }
 
@@ -174,5 +185,49 @@ public class TaskManager : MonoBehaviour
                 _finishedAllTasks = false;
         }
         gameController.finishedAllTasks = _finishedAllTasks;
+    }
+
+    void HandleRandomization()
+    {
+        GameObject[] boxes = GameObject.FindGameObjectsWithTag("Box");
+        GameObject[] mops = GameObject.FindGameObjectsWithTag("Mop");
+        int boxAmount = boxes.Length - GetTaskAmount(Task.TaskType.BOX_COLLECTION);
+        int mopAmount = mops.Length - GetTaskAmount(Task.TaskType.MOPPING);
+        
+        ShuffleArray<GameObject>(boxes);
+        ShuffleArray<GameObject>(mops);
+        
+        foreach (GameObject box in boxes)
+        {
+            if (boxAmount > 0)
+            {
+                box.SetActive(false);
+                boxAmount--;
+            }
+        }
+
+        foreach (GameObject mop in mops)
+        {
+            if (mopAmount > 0)
+            {
+                mop.SetActive(false);
+                mopAmount--;
+            }
+        }
+    }
+
+    void ShuffleArray<T>(T[] array)
+    {
+        int n = array.Length;
+        for (int i = 0; i < n; i++)
+        {
+            // Pick a new index higher than current for each item in the array
+            int r = i + Random.Range(0, n - i);
+
+            // Swap item into new spot
+            T t = array[r];
+            array[r] = array[i];
+            array[i] = t;
+        }
     }
 }
