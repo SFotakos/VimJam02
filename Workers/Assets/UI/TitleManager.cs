@@ -46,7 +46,7 @@ public class TitleManager : MonoBehaviour
             case ButtonType.PLAY:
                 if (!PlayerPrefs.HasKey("FinishedTutorial"))
                 {
-                    SceneManager.LoadScene("FirstTutorial");
+                    SceneManager.LoadScene("GameSettingsScene", LoadSceneMode.Additive);
                 }
                 else
                 {
