@@ -1,5 +1,5 @@
 # VimJam02
-Repository for the VimJam02 and it's theme was _*Boss*_.
+Repository for the [VimJam02](https://itch.io/jam/vimjam2) and it's theme was _*Boss*_.
 
 This game feature Cool-Glasses and Pink-Hair, two workers trying to handle their rude boss in their daily factory-work tasks.
 
